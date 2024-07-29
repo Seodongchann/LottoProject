@@ -37,7 +37,7 @@ public class LottoNum {
 			return "반자동";
 		}else if("수동" == list.get(b)) {
 			return "수　동";
-		}
+		}d
 		return "";
 	}
 	
