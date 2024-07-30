@@ -39,7 +39,6 @@ public class LottoStart extends JFrame {
 		p.add(btn);
 		p.add(lbl);
 		add(p);
-
 		// 버튼 45개 생성
 		int x = 200;
 		int y = 0;
