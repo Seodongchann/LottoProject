@@ -1,7 +1,8 @@
 package kr.co.lotto;
 
 import java.awt.Color;
-import java.awt.color.ColorSpace;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +17,9 @@ import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 
 public class LottoStart extends JFrame {
+	private static final int Max = 6;
+	private int count = 0;
+
 	public LottoStart() {
 
 //		JButton[] btn = new JButton[45];
@@ -69,31 +72,11 @@ public class LottoStart extends JFrame {
 					f += 40;
 				}
 
-				btn2.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int[] ss = new int[list2.size()];
-						for (int i = 0; i < list2.size(); i++) {
-							for (int j = 0; j < list2.get(i).size(); j++) {
-								if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
-									ss[i]++;
-								}
-							}
-						}
-						
-//						int count = 0;
-//						if(btn2.isSelected()) {
-//							count++;
-//						}
-//						btn2.setBackground(Color.pink);
-//						System.out.println(count);
-//						
-
-					}
-				});
 				list.get(j).add(btn2);
 
+				btn2Listener(list, btn2);
 			}
+
 			z = 0;
 			f = 50;
 
@@ -153,6 +136,32 @@ public class LottoStart extends JFrame {
 		setSize(2000, 600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+	}
+
+	private void btn2Listener(List<JPanel> list, JButton btn2) {
+		btn2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (count < Max) {
+					count++;
+					btn2.setBackground(Color.pink);
+					btn2.setEnabled(false);
+				}
+				if (count >= Max) {
+					Container parent = btn2.getParent();
+					for (Component component : parent.getComponents()) {
+						if (component instanceof JButton) {
+							JButton btn = (JButton) component;
+							if (btn.isEnabled()) {
+								btn.setEnabled(false);
+							}
+						}
+					}
+				}
+
+			}
+		});
 	}
 
 	public static void main(String[] args) {

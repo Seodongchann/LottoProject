@@ -34,10 +34,10 @@ public class LottoLast extends JFrame {
 		super("결과");
 		// 1등 번호 생성
 		SetReset();
-		l.list = new ArrayList<String>();
-		l.map = new HashMap<String, List<Integer>>();
-		List<String> listA = l.list;
-		Map<String, List<Integer>> map = l.map;
+//		l.list = new ArrayList<String>();
+//		l.map = new HashMap<String, List<Integer>>();
+//		List<String> listA = l.list;
+//		Map<String, List<Integer>> map = l.map;
 		JLabel pnl = new JLabel();
 		List<Integer> list = new ArrayList<Integer>();
 		ImageIcon icon = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lotto.png"));
@@ -85,7 +85,7 @@ public class LottoLast extends JFrame {
 		for (int i = 0; i < 5; i++) {
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
-			map.put(String.valueOf(c2), list);
+			LottoNum.MAP.put(String.valueOf(c2), list);
 		}
 // 당첨 번호 출력 + 보너스 번호 출력
 		int x = 0;
@@ -132,17 +132,17 @@ public class LottoLast extends JFrame {
 		int x2 = 70;
 		int y2 = 380;
 		// 당첨번호 조회 메소드
-		for (int i = 0; i < map.size(); i++) {
+		for (int i = 0; i < LottoNum.MAP.size(); i++) {
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
-			for (int j = 0; j < map.get(s).size(); j++) {
+			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
 				for (int j2 = 0; j2 < listS.size(); j2++) {
-					if (map.get(s).size() <= listS.size()) {
-						if (map.get(s).get(j) == listS.get(j2)) {
+					if (LottoNum.MAP.get(s).size() <= listS.size()) {
+						if (LottoNum.MAP.get(s).get(j) == listS.get(j2)) {
 							clap++;
 						}
 					} else {
-						if (map.get(s).get(j) == listS.get(j2)) {
+						if (LottoNum.MAP.get(s).get(j) == listS.get(j2)) {
 							clap1++;
 						}
 					}
@@ -196,7 +196,7 @@ public class LottoLast extends JFrame {
 // 유저정보 출력
 		int x1 = 145;
 		int y1 = 385;
-		for (int i = 0; i < map.size(); i++) {
+		for (int i = 0; i < LottoNum.MAP.size(); i++) {
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
 			JLabel lb1 = new JLabel();
@@ -204,18 +204,18 @@ public class LottoLast extends JFrame {
 			lb1.setBounds(x1 - 125, y1, 50, 50);
 			lb1.setFont(new Font(" ", Font.BOLD, 15));
 			pnl.add(lb1);
-			for (int j = 0; j < map.get(s).size(); j++) {
+			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
 				JLabel lb = new JLabel();
-				lb.setText("" + map.get(s).get(j));
+				lb.setText("" + LottoNum.MAP.get(s).get(j));
 				lb.setBounds(x1, y1, 40, 40);
 				lb.setFont(new Font(" ", Font.BOLD, 15));
 				lb.setHorizontalTextPosition(JLabel.CENTER);
 				pnl.add(lb);
 				x1 += 55;
-				int a = map.get(s).get(j);
+				int a = LottoNum.MAP.get(s).get(j);
 				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
 			}
-			x1 -= (55 * map.get(s).size());
+			x1 -= (55 * LottoNum.MAP.get(s).size());
 			y1 += 52;
 		}
 		pnl.setBounds(0, 0, 500, 700);
@@ -265,7 +265,6 @@ public class LottoLast extends JFrame {
 
 // 당첨 중복 메소드
 	private void 당첨메소드(JLabel pnl, int x2, int y2, int dl) {
-
 		JLabel lbD = new JLabel();
 		if (dl == 0) {
 			lbD.setText("미당첨");
