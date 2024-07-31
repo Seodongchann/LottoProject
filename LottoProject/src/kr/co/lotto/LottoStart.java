@@ -6,7 +6,10 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +22,7 @@ import javax.swing.border.LineBorder;
 public class LottoStart extends JFrame {
 	private static final int Max = 6;
 	private int count = 0;
+	private int[] counts = { 0, 0, 0, 0, 0 };
 
 	public LottoStart() {
 
@@ -70,10 +74,9 @@ public class LottoStart extends JFrame {
 					z = 0;
 					f += 40;
 				}
-
 				list.get(j).add(btn2);
+				btn2Listener(list2, btn2);
 
-				btn2Listener(list, btn2);
 			}
 
 			z = 0;
@@ -132,33 +135,59 @@ public class LottoStart extends JFrame {
 			list.get(i).setBorder(new LineBorder(Color.pink));
 		}
 
+		btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				char gs = 'A';
+				List<List<Integer>> li = new ArrayList<List<Integer>>();
+				for (int i = 0; i < list2.size(); i++) {
+					List<Integer> s = new ArrayList<Integer>();
+					for (int j = 0; j < list2.get(i).size(); j++) {
+						if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
+							s.add(Integer.parseInt(list2.get(i).get(j).getText()));
+						}
+					}
+					li.add(s);
+					System.out.println(li.get(i));
+					if (li.get(i).size() >= 6) {
+						String ss = String.valueOf(gs++);
+						LottoNum.MAP.put(ss, li.get(i));
+					}
+
+				}
+
+				new LottoSecond().setVisible(true);
+			}
+		});
+
 		setSize(2000, 600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 
-	private void btn2Listener(List<JPanel> list, JButton btn2) {
+	public void btn2Listener(List<List<JButton>> list2, JButton btn2) {
 		btn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if (count < Max) {
-					count++;
+				if (btn2.getBackground().equals(Color.white)) {
 					btn2.setBackground(Color.pink);
-					btn2.setEnabled(false);
-				}
-				if (count >= Max) {
-					Container parent = btn2.getParent();
-					for (Component component : parent.getComponents()) {
-						if (component instanceof JButton) {
-							JButton btn = (JButton) component;
-							if (btn.isEnabled()) {
-								btn.setEnabled(false);
+					for (int i = 0; i < list2.size(); i++) {
+						counts[i] = 0;
+						for (int j = 0; j < list2.get(i).size(); j++) {
+							if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
+								counts[i]++;
 							}
 						}
 					}
+					for (int i = 0; i < counts.length; i++) {
+						if (counts[i] > 6) {
+							btn2.setBackground(Color.white);
+						}
+					}
+				} else {
+					btn2.setBackground(Color.white);
 				}
-
 			}
 		});
 	}
