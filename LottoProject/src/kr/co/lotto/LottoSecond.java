@@ -16,24 +16,11 @@ import javax.swing.JPanel;
 public final class LottoSecond extends JFrame {
 
 	public LottoSecond() {
-		LottoNum lottoNum = new LottoNum();
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		list.add(4);
-		list.add(5);
-		list.add(6);
-
-		LottoNum.MAP.put("A", list);
-		LottoNum.MAP.put("B", list);
-		LottoNum.MAP.put("C", list);
-		LottoNum.MAP.put("D", list);
-		LottoNum.MAP.put("E", list);
+		
 
 		int x = 0;
 		int y = 0;
-		int w = 500;
+		int w = 459;
 		int h = 200;
 		setLayout(null);
 		List<JPanel> pnls = new ArrayList<JPanel>();
@@ -49,6 +36,7 @@ public final class LottoSecond extends JFrame {
 		ImageIcon icon = new ImageIcon(LottoSecond.class.getResource("캡쳐4.png"));
 		ImageIcon icon2 = new ImageIcon(LottoSecond.class.getResource("캡쳐2.png"));
 		ImageIcon icon3 = new ImageIcon(LottoSecond.class.getResource("캡쳐1.png"));
+		ImageIcon icon4 = new ImageIcon(LottoSecond.class.getResource("사이드2.png"));
 
 		JLabel lb = new JLabel();
 		lb.setIcon(icon);
@@ -60,7 +48,7 @@ public final class LottoSecond extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// new LottoLast().setVisible(true);
+				 new LottoLast().setVisible(true);
 			}
 		});
 
@@ -103,10 +91,19 @@ public final class LottoSecond extends JFrame {
 
 		pnls.get(2).add(lb4);
 		pnls.get(2).add(lb3);
-
+		
+		
+		JPanel pn = new JPanel();
+		JLabel ilbl = new JLabel();
+		pn.setLayout(null);
+		pn.setBounds(459, 0, 41, 600);
+		ilbl.setBounds(0, 0, 41, 600);
+		ilbl.setIcon(icon4);
+		pn.add(ilbl);
+		
+		add(pn);
 		setSize(500, 630);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 	}
 
 	public static void main(String[] args) {
