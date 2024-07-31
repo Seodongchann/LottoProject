@@ -3,6 +3,8 @@ package kr.co.lotto;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,13 +20,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class LottoLast extends JFrame {
-	LottoNum l = new LottoNum();
+//	LottoNum l = new LottoNum();
 	Set<Integer> set = new TreeSet<Integer>();
 	Random r = new Random();
+	LottoSecond se ;
 
 	public LottoLast() {
 		super("결과");
@@ -69,11 +73,12 @@ public class LottoLast extends JFrame {
 		lbLog2.setIcon(icon3);
 		lbLog2.setBounds(getX(), 630, 500, 40);
 		pnl.add(lbLog2);
-
+		// 출력값 정렬
 		List<Integer> listS = new ArrayList<Integer>();
 		for (Integer i : set) {
 			listS.add(i);
 		}
+		/////////////////////////////////////
 		// 임의의 값 넣는 조건
 		for (int j = 1; j < 7; j++) {
 			list.add(j);
@@ -83,6 +88,7 @@ public class LottoLast extends JFrame {
 			String s = String.valueOf(c2);
 			LottoNum.MAP.put(String.valueOf(c2), list);
 		}
+		////////////////////////////////////////
 // 당첨 번호 출력 + 보너스 번호 출력
 		int x = 0;
 		int y = 180;
@@ -111,7 +117,7 @@ public class LottoLast extends JFrame {
 				int a = listS.get(i);
 				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
 			}
-			
+
 		}
 		// 당첨에 따라 출력
 		int first = 0;
@@ -197,8 +203,9 @@ public class LottoLast extends JFrame {
 			String s = String.valueOf(c2);
 			JLabel lb1 = new JLabel();
 			lb1.setText("" + s);
-			lb1.setBounds(x1 - 125, y1, 50, 50);
+			lb1.setBounds(x1 - 110, y1, 50, 50);
 			lb1.setFont(new Font(" ", Font.BOLD, 15));
+			lb1.setHorizontalTextPosition(JLabel.RIGHT);
 			pnl.add(lb1);
 			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
 				JLabel lb = new JLabel();
@@ -214,17 +221,43 @@ public class LottoLast extends JFrame {
 			x1 -= (55 * LottoNum.MAP.get(s).size());
 			y1 += 52;
 		}
+		
+		
+		// 다시하기 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
+				System.out.println(result);
+				if (result == JOptionPane.OK_OPTION) {
+					dispose();
+//					se.dispose();
+					LottoNum.LIST.clear();
+					LottoNum.MAP.clear();
+					System.out.println(result+100);
+				} else if (result == 1){
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
+					System.out.println(result+200);
+				} else {
+					setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+					System.out.println(result+300);
+				}
+			}
+		});
+		
+		
 		pnl.setBounds(0, 0, 500, 700);
 		pnl.setLayout(null);
 		setLayout(null);
 		add(pnl);
 		pnl.setIcon(icon);
 		setBounds(0, 0, 500, 700);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	}
+
 // 숫자 크기별 이미지 넣기
-	private void 숫자크기별이미지(int a, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6,
-			ImageIcon icon7, ImageIcon icon8, JLabel lb) {
+	private void 숫자크기별이미지(int a, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6, ImageIcon icon7, ImageIcon icon8,
+			JLabel lb) {
 		if (a > 0 && a < 11) {
 			lb.setIcon(icon4);
 		} else if (a >= 11 && a < 21) {
@@ -284,7 +317,7 @@ public class LottoLast extends JFrame {
 			} else {
 				set.clear();
 			}
-		}
+		}     
 	}
 
 	public static void main(String[] args) {

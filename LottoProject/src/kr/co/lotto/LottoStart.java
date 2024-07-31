@@ -1,8 +1,7 @@
 package kr.co.lotto;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -74,11 +74,33 @@ public class LottoStart extends JFrame {
 					z = 0;
 					f += 40;
 				}
+
+				btn2.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int[] ss = new int[list2.size()];
+						for (int i = 0; i < list2.size(); i++) {
+							for (int j = 0; j < list2.get(i).size(); j++) {
+								if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
+									ss[i]++;
+								}
+							}
+						}
+						
+//						int count = 0;
+//						if(btn2.isSelected()) {
+//							count++;
+//						}
+//						btn2.setBackground(Color.pink);
+//						System.out.println(count);
+//						
+
+					}
+				});
 				list.get(j).add(btn2);
 				btn2Listener(list2, btn2);
 
 			}
-
 			z = 0;
 			f = 50;
 
@@ -164,7 +186,6 @@ public class LottoStart extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
-
 	public void btn2Listener(List<List<JButton>> list2, JButton btn2) {
 		btn2.addActionListener(new ActionListener() {
 			@Override
