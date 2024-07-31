@@ -21,10 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import javafx.scene.layout.BackgroundImage;
-
 public class LottoLast extends JFrame {
 	LottoNum l = new LottoNum();
 	Set<Integer> set = new TreeSet<Integer>();

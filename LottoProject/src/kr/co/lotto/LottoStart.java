@@ -85,7 +85,6 @@ public class LottoStart extends JFrame {
 			getContentPane().add(btnpnl);
 
 		}
-
 		// 체크박스 위치 초기설정값
 		int boxX = 0;
 		int boxW = 150;
