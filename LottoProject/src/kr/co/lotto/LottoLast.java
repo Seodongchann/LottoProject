@@ -29,19 +29,12 @@ public class LottoLast extends JFrame {
 //	LottoNum l = new LottoNum();
 	Set<Integer> set = new TreeSet<Integer>();
 	Random r = new Random();
-	LottoSecond se;
 
 	public LottoLast() {
 		super("결과");
-		// 1등 번호 생성
+		// 당첨 번호 생성
 		SetReset();
-//		l.list = new ArrayList<String>();
-//		l.map = new HashMap<String, List<Integer>>();
-//		List<String> listA = l.list;
-//		Map<String, List<Integer>> map = l.map;
 		JLabel pnl = new JLabel();
-		List<Integer> list = new ArrayList<Integer>();
-
 		ImageIcon icon = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lotto.png"));
 		ImageIcon icon2 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog.png"));
 		ImageIcon icon3 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog2.png"));
@@ -52,19 +45,11 @@ public class LottoLast extends JFrame {
 		ImageIcon icon8 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/핑크원형40.png"));
 		ImageIcon icon9 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lotto축하.jpg"));
 		char c = 'A'; // 최초 번호 부여
-		// 제목 메소드
-//		JLabel lbG = new JLabel("로또 6/45 제 1회");
-//		lbG.setBounds(180, 50, 200, 100);
-//		lbG.setFont(new Font("로또 6/45 제 1회?", Font.BOLD, 20));
-//		lbG.setForeground(Color.PINK);
-//		pnl.add(lbG);
-
 		// 당첨번호 라벨
 		JLabel lbLo = new JLabel("당첨번호");
 		lbLo.setBounds(200, 110, 200, 100);
 		lbLo.setFont(new Font(" ", Font.BOLD, 25));
 		pnl.add(lbLo);
-
 		// 로또 로고
 		JLabel lbLog = new JLabel();
 		lbLog.setIcon(icon2);
@@ -73,7 +58,7 @@ public class LottoLast extends JFrame {
 		// 로또 밑에 로고
 		JLabel lbLog2 = new JLabel();
 		lbLog2.setIcon(icon3);
-		lbLog2.setBounds(getX(), 630, 500, 40);
+		lbLog2.setBounds(getX(), 645, 485, 13);
 		pnl.add(lbLog2);
 		// 출력값 정렬
 		List<Integer> listS = new ArrayList<Integer>();
@@ -82,6 +67,7 @@ public class LottoLast extends JFrame {
 		}
 		/////////////////////////////////////
 		// 임의의 값 넣는 조건
+//		List<Integer> list = new ArrayList<>(); 
 //		for (int j = 1; j < 7; j++) {
 //			list.add(j);
 //		}
@@ -111,7 +97,7 @@ public class LottoLast extends JFrame {
 			JLabel lb2 = new JLabel();
 			lb2.setText("" + listS.get(i));
 			lb2.setHorizontalTextPosition(JLabel.CENTER);
-			lb2.setFont(new Font(" ", Font.BOLD, 17));
+			lb2.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 			lb2.setForeground(Color.WHITE);
 			lb2.setBounds(x, y, 60, 60);
 			pnl.add(lb2);
@@ -120,6 +106,46 @@ public class LottoLast extends JFrame {
 			숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
 
 		}
+
+		// 유저정보 출력
+		int x1 = 145;
+		int y1 = 385;
+		for (int i = 0; i < LottoNum.MAP.size(); i++) {
+			char c2 = (char) (c + i);
+			String s = String.valueOf(c2);
+			JLabel lb1 = new JLabel();
+			lb1.setText("" + s);
+			lb1.setBounds(x1 - 110, y1-10, 50, 50);
+			lb1.setFont(new Font(" ", Font.BOLD, 15));
+			lb1.setHorizontalTextPosition(JLabel.RIGHT);
+			pnl.add(lb1);
+			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
+				JLabel lb = new JLabel();
+				lb.setText("" + LottoNum.MAP.get(s).get(j));
+				lb.setBounds(x1, y1, 40, 40);
+				lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+				lb.setHorizontalTextPosition(JLabel.CENTER);
+				//////
+				// 추첨번호와 유저 번호 같으면 Font 변경
+				// 특이점 주기위한 조건>> 추후 이미지 받으면 icon 변경으로
+				for (int k = 0; k < listS.size(); k++) {
+					if (LottoNum.MAP.get(s).get(j).equals(listS.get(k))) {
+//						lb.setIcon(에베베);
+						lb.setForeground(Color.YELLOW);
+					} else {
+
+					}
+				}
+				//////
+				pnl.add(lb);
+				x1 += 55;
+				int a = LottoNum.MAP.get(s).get(j);
+				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
+			}
+			x1 -= (55 * LottoNum.MAP.get(s).size());
+			y1 += 52;
+		}
+
 		// 당첨에 따라 출력
 		int first = 0;
 		int second = 0;
@@ -133,7 +159,7 @@ public class LottoLast extends JFrame {
 		// 보너스 번호 추가 조회
 		int clap1 = 0;
 		int x2 = 70;
-		int y2 = 380;
+		int y2 = 370;
 		// 당첨번호 조회 메소드
 		for (int i = 0; i < LottoNum.MAP.size(); i++) {
 			char c2 = (char) (c + i);
@@ -154,30 +180,30 @@ public class LottoLast extends JFrame {
 
 			if (clap == 3) {
 				// 5등
-				당첨메소드(pnl, x2, y2, 5);
+				당첨메소드(pnl, x2, y2, 5, i);
 				five++;
 			} else if (clap == 4) {
 				// 4등
-				당첨메소드(pnl, x2, y2, 4);
+				당첨메소드(pnl, x2, y2, 4, i);
 				four++;
 			} else if (clap == 5) {
 				// 3등
-				당첨메소드(pnl, x2, y2, 3);
+				당첨메소드(pnl, x2, y2, 3, i);
 				third++;
 			} else if (clap == 5 && clap1 == 1) {
 				// 2등
-				당첨메소드(pnl, x2, y2, 2);
+				당첨메소드(pnl, x2, y2, 2, i);
 				second++;
 			} else if (clap == 6) {
 				// 1등
-				당첨메소드(pnl, x2, y2, 1);
+				당첨메소드(pnl, x2, y2, 1, i);
 				first++;
 			} else {
 				// 꽝...
-				당첨메소드(pnl, x2, y2, 0);
+				당첨메소드(pnl, x2, y2, 0, i);
 				mess++;
 			}
-			y2 += 51;
+			y2 += 55;
 			clap = 0;
 			clap1 = 0;
 		}
@@ -194,33 +220,6 @@ public class LottoLast extends JFrame {
 			당첨메시지출력(pnl, 5, null);
 		} else if (mess > 0 && five <= 0 && four <= 0 && third <= 0 && second <= 0 && first <= 0) {
 			당첨메시지출력(pnl, 0, null);
-		}
-
-// 유저정보 출력
-		int x1 = 145;
-		int y1 = 385;
-		for (int i = 0; i < LottoNum.MAP.size(); i++) {
-			char c2 = (char) (c + i);
-			String s = String.valueOf(c2);
-			JLabel lb1 = new JLabel();
-			lb1.setText("" + s);
-			lb1.setBounds(x1 - 110, y1, 50, 50);
-			lb1.setFont(new Font(" ", Font.BOLD, 15));
-			lb1.setHorizontalTextPosition(JLabel.RIGHT);
-			pnl.add(lb1);
-			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
-				JLabel lb = new JLabel();
-				lb.setText("" + LottoNum.MAP.get(s).get(j));
-				lb.setBounds(x1, y1, 40, 40);
-				lb.setFont(new Font(" ", Font.BOLD, 15));
-				lb.setHorizontalTextPosition(JLabel.CENTER);
-				pnl.add(lb);
-				x1 += 55;
-				int a = LottoNum.MAP.get(s).get(j);
-				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
-			}
-			x1 -= (55 * LottoNum.MAP.get(s).size());
-			y1 += 52;
 		}
 
 		// 다시하기
@@ -293,16 +292,32 @@ public class LottoLast extends JFrame {
 	}
 
 // 당첨 중복 메소드
-	private void 당첨메소드(JLabel pnl, int x2, int y2, int dl) {
+	private void 당첨메소드(JLabel pnl, int x2, int y2, int dl, int aA) {
 		JLabel lbD = new JLabel();
+		JLabel lbA = new JLabel();
 		if (dl == 0) {
 			lbD.setText("미당첨");
 		} else {
 			lbD.setText(dl + "등당첨");
 		}
-		lbD.setBounds(x2, y2, 60, 50);
-		lbD.setFont(new Font(" ", Font.BOLD, 14));
+		if (aA == 0) {
+			lbA.setText("("+LottoNum.LIST.get(aA)+")");
+		} else if (aA == 1) {
+			lbA.setText("("+LottoNum.LIST.get(aA)+")");
+		} else if (aA == 2) {
+			lbA.setText("("+LottoNum.LIST.get(aA)+")");
+		} else if (aA == 3) {
+			lbA.setText("("+LottoNum.LIST.get(aA)+")");
+		} else if (aA == 4) {
+			lbA.setText("("+LottoNum.LIST.get(aA)+")");
+		}
+
+		lbA.setBounds(x2, y2+25, 50, 30); // 자동 반자동 수동
+		lbD.setBounds(x2, y2, 50, 30); // 당첨 확인
+		lbD.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lbA.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		pnl.add(lbD);
+		pnl.add(lbA);
 	}
 
 // 1등 추첨번호 출력
