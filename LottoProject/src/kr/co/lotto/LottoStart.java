@@ -264,10 +264,11 @@ public class LottoStart extends JFrame {
 						}
 						for (int j = 0; j < list2.get(i).size(); j++) {
 							if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
-								
+
 							}
 						}
 						btn4.setEnabled(true);
+						btn5.setEnabled(true);
 					}
 
 				}
