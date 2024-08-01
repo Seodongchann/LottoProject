@@ -22,6 +22,14 @@ public class LottoStart extends JFrame {
 	private int count = 0;
 	private int[] counts = { 0, 0, 0, 0, 0 };
 
+	
+	
+	//btn = NEXT버튼
+	//btn2 = 숫자 1~45번 버튼
+	//btn3 = 각 패널에있는 초기화버튼
+	//btn4 = 각 패널에 있는 자동 버튼
+	//btn5 = 전체 자동 버튼
+	//btn6 = 전체 초기화버튼
 	public LottoStart() {
 
 //		JButton[] btn = new JButton[45];
@@ -32,6 +40,20 @@ public class LottoStart extends JFrame {
 
 		JPanel p = new JPanel();
 		JLabel lbl = new JLabel();
+		
+		JButton btn5 = new JButton("자동");
+		btn5.setBackground(Color.pink);
+		btn5.setBounds(50,55,75,30);
+		btn5.setFont(new Font(" ", Font.BOLD, 12));
+		p.add(btn5);
+		
+		JButton btn6 = new JButton("초기화");
+		btn6.setBackground(Color.pink);
+		btn6.setBounds(50,85,75,30);
+		btn6.setFont(new Font(" ", Font.BOLD, 12));
+		p.add(btn6);
+		
+		
 		JButton btn = new JButton("N E X T");
 		btn.setBackground(Color.pink);
 		btn.setBounds(40, 0, 120, 50);
@@ -67,6 +89,9 @@ public class LottoStart extends JFrame {
 			// 버튼 45개 생성
 			List<JButton> list3 = new ArrayList<JButton>();
 			list2.add(list3);
+			
+			
+			//각 패널에 버튼 45개 생성 
 			for (int i = 1; i < 46; i++) {
 				JButton btn2 = new JButton(String.valueOf(i));
 				list3.add(btn2);
@@ -77,7 +102,8 @@ public class LottoStart extends JFrame {
 					z = 0;
 					f += 40;
 				}
-
+				
+				//숫자 버튼을 누르면 핑크색으로 바꾸는 기능 
 				btn2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -97,12 +123,12 @@ public class LottoStart extends JFrame {
 			}
 			z = 0;
 			f = 50;
+			
+			
 			// 체크박스 위치 초기설정값
 			int boxX = 0;
 			int boxW = 150;
 			int boxH = 30;
-
-			// 자동 체크박스 5개 만들기
 
 			// 이건 버튼으로 5개 만들기 verison
 			JButton btn4 = new JButton("자동");
@@ -110,6 +136,8 @@ public class LottoStart extends JFrame {
 			btn4.setSize(75, 20);
 			btn4.setBackground(Color.PINK);
 			list.get(j).add(btn4);
+			
+			//자동 버튼 기능 구현 
 			btn4.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -150,6 +178,65 @@ public class LottoStart extends JFrame {
 				}
 			});
 			lll.add(btn4);
+			
+			
+			
+			
+
+			//전체 자동 기능 구현
+			btn5.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					btn4.setEnabled(false);
+					Random r = new Random();
+					for (int i = 0; i < list3.size(); i++) {
+						if (list3.get(i).getBackground().equals(Color.pink)) {
+							count++;
+						}
+						list3.get(i).setEnabled(false);
+					}
+					if (count == 0) {
+						btn4.setBackground(color2);
+					}
+					if (count > 0) {
+						btn4.setBackground(color1);
+
+					}
+
+					for (int i = 0; i < 6 - count; i++) {
+						int a = r.nextInt(45) + 1;
+						for (int j = 0; j < list3.size(); j++) {
+							if (list3.get(j).getText().equals(String.valueOf(a))
+									&& list3.get(j).getBackground().equals(Color.pink)) {
+								i--;
+							}
+							if (list3.get(j).getText().equals(String.valueOf(a))
+									&& list3.get(j).getBackground().equals(Color.white)) {
+								list3.get(j).setBackground(Color.pink);
+							}
+						}
+
+					}
+					count = 0;
+					for (int i = 0; i < list2.size(); i++) {
+					}
+				}
+			});
+			btn6.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					for (int i = 0; i < list2.size(); i++) {
+						if (!btn4.getBackground().equals(Color.pink)) {
+							btn4.setBackground(Color.pink);
+						}
+						lll.get(i).setEnabled(true);
+					}
+					for (int i = 0; i < list3.size(); i++) {
+						list3.get(i).setBackground(Color.white);
+						list3.get(i).setEnabled(true);
+					}
+				}
+			});
 			JButton btn3 = new JButton("초기화");
 			btn3.setBounds(150, 400, boxW, boxH);
 			btn3.setSize(75, 20);
