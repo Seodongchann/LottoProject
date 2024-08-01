@@ -48,19 +48,15 @@ public class LottoLast extends JFrame {
 		char c = 'A'; // 최초 번호 부여
 		// 당첨번호 라벨
 		JLabel lbLo = new JLabel("당첨번호");
-		lbLo.setBounds(200, 110, 200, 100);
-		lbLo.setFont(new Font(" ", Font.BOLD, 25));
+		lbLo.setHorizontalTextPosition(JLabel.CENTER);
+		lbLo.setBounds(200, 95, 200, 100);
+		lbLo.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 		pnl.add(lbLo);
 		// 로또 로고
 		JLabel lbLog = new JLabel();
 		lbLog.setIcon(icon2);
 		lbLog.setBounds(0, 0, 500, 130);
 		pnl.add(lbLog);
-		// 로또 밑에 로고
-//		JLabel lbLog2 = new JLabel();
-//		lbLog2.setIcon(icon3);
-//		lbLog2.setBounds(0, 645, 484, 13);
-//		pnl.add(lbLog2);
 		// 출력값 정렬
 		List<Integer> listS = new ArrayList<Integer>();
 		for (Integer i : set) {
@@ -80,7 +76,7 @@ public class LottoLast extends JFrame {
 		////////////////////////////////////////
 // 당첨 번호 출력 + 보너스 번호 출력
 		int x = 30;
-		int y = 180;
+		int y = 155;
 		int count = 0;
 		for (int i = 0; i < listS.size(); i++) {
 			char c2 = (char) (c + i);
@@ -112,7 +108,7 @@ public class LottoLast extends JFrame {
 
 		// 유저정보 출력
 		int x1 = 145;
-		int y1 = 385;
+		int y1 = 370;
 		for (int i = 0; i < LottoNum.MAP.size(); i++) {
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
@@ -143,7 +139,7 @@ public class LottoLast extends JFrame {
 				x1 += 55;
 			}
 			x1 -= (55 * LottoNum.MAP.get(s).size());
-			y1 += 52;
+			y1 += 51;
 		}
 
 		// 당첨에 따라 출력
@@ -159,7 +155,7 @@ public class LottoLast extends JFrame {
 		// 보너스 번호 추가 조회
 		int clap1 = 0;
 		int x2 = 70;
-		int y2 = 375;
+		int y2 = 370;
 		// 당첨번호 조회 메소드
 		for (int i = 0; i < LottoNum.MAP.size(); i++) {
 			char c2 = (char) (c + i);
@@ -282,7 +278,7 @@ public class LottoLast extends JFrame {
 		}
 		lp.setBounds(0, 230, 500, 100);
 		lp.setHorizontalAlignment(SwingConstants.CENTER);
-		lp.setFont(new Font(" ", Font.BOLD, 20));
+		lp.setFont(new Font("맑은 고딕", Font.BOLD, 23));
 		pnl.add(lp);
 	}
 
@@ -306,7 +302,7 @@ public class LottoLast extends JFrame {
 		} else if (aA == 4) {
 			lbA.setText("(" + LottoNum.LIST.get(aA) + ")");
 		}
-		lbA.setBounds(x2, y2 + 25, 50, 30); // 자동 반자동 수동
+		lbA.setBounds(x2, y2 + 15, 50, 30); // 자동 반자동 수동
 		lbD.setBounds(x2, y2, 50, 30); // 당첨 확인
 		lbD.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lbA.setFont(new Font("맑은 고딕", Font.BOLD, 13));
