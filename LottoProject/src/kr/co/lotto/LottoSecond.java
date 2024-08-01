@@ -49,6 +49,7 @@ public final class LottoSecond extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				 new LottoLast().setVisible(true);
 			}
 		});
@@ -62,13 +63,13 @@ public final class LottoSecond extends JFrame {
 			char c = 'A';
 			char s = (char) (c + i);
 			JLabel lbl = new JLabel(String.valueOf(s));
-			JLabel lbl2 = new JLabel("자  동");
+			
+			JLabel lbl2 = new JLabel(LottoNum.LIST.get(i));
 
 			lbl.setBounds(x, y, 40, 40);
 			lbl2.setBounds(x += 50, y, 40, 40);
 			for (int j = 0; j < LottoNum.MAP.get(String.valueOf(s)).size(); j++) {
 				String s2 = String.valueOf(LottoNum.MAP.get(String.valueOf(s)).get(j));
-				System.out.println(s2);
 				JLabel lbls = new JLabel(s2);
 				lbls.setFont(new Font("", Font.BOLD, 15));
 				x += 50;

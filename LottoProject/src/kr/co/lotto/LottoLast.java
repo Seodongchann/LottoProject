@@ -3,6 +3,7 @@ package kr.co.lotto;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MediaTracker;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class LottoLast extends JFrame {
 //	LottoNum l = new LottoNum();
 	Set<Integer> set = new TreeSet<Integer>();
 	Random r = new Random();
-	LottoSecond se ;
+	LottoSecond se;
 
 	public LottoLast() {
 		super("결과");
@@ -40,6 +41,7 @@ public class LottoLast extends JFrame {
 //		Map<String, List<Integer>> map = l.map;
 		JLabel pnl = new JLabel();
 		List<Integer> list = new ArrayList<Integer>();
+
 		ImageIcon icon = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lotto.png"));
 		ImageIcon icon2 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog.png"));
 		ImageIcon icon3 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog2.png"));
@@ -80,14 +82,14 @@ public class LottoLast extends JFrame {
 		}
 		/////////////////////////////////////
 		// 임의의 값 넣는 조건
-		for (int j = 1; j < 7; j++) {
-			list.add(j);
-		}
-		for (int i = 0; i < 5; i++) {
-			char c2 = (char) (c + i);
-			String s = String.valueOf(c2);
-			LottoNum.MAP.put(String.valueOf(c2), list);
-		}
+//		for (int j = 1; j < 7; j++) {
+//			list.add(j);
+//		}
+//		for (int i = 0; i < 5; i++) {
+//			char c2 = (char) (c + i);
+//			String s = String.valueOf(c2);
+//			LottoNum.MAP.put(String.valueOf(c2), list);
+//		}
 		////////////////////////////////////////
 // 당첨 번호 출력 + 보너스 번호 출력
 		int x = 0;
@@ -104,19 +106,18 @@ public class LottoLast extends JFrame {
 				lb2.setHorizontalTextPosition(JLabel.CENTER);
 				lb2.setFont(new Font(" ", Font.BOLD, 15));
 				pnl.add(lb2);
-			} else {
-				x += 50;
-				JLabel lb2 = new JLabel();
-				lb2.setText("" + listS.get(i));
-				lb2.setHorizontalTextPosition(JLabel.CENTER);
-				lb2.setFont(new Font(" ", Font.BOLD, 17));
-				lb2.setForeground(Color.WHITE);
-				lb2.setBounds(x, y, 60, 60);
-				pnl.add(lb2);
-				// 숫자 크기별 이미 넣기
-				int a = listS.get(i);
-				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
 			}
+			x += 50;
+			JLabel lb2 = new JLabel();
+			lb2.setText("" + listS.get(i));
+			lb2.setHorizontalTextPosition(JLabel.CENTER);
+			lb2.setFont(new Font(" ", Font.BOLD, 17));
+			lb2.setForeground(Color.WHITE);
+			lb2.setBounds(x, y, 60, 60);
+			pnl.add(lb2);
+			// 숫자 크기별 이미 넣기
+			int a = listS.get(i);
+			숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
 
 		}
 		// 당첨에 따라 출력
@@ -221,9 +222,8 @@ public class LottoLast extends JFrame {
 			x1 -= (55 * LottoNum.MAP.get(s).size());
 			y1 += 52;
 		}
-		
-		
-		// 다시하기 
+
+		// 다시하기
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -231,21 +231,20 @@ public class LottoLast extends JFrame {
 				System.out.println(result);
 				if (result == JOptionPane.OK_OPTION) {
 					dispose();
-//					se.dispose();
+					new LottoStart().setVisible(true);
 					LottoNum.LIST.clear();
 					LottoNum.MAP.clear();
-					System.out.println(result+100);
-				} else if (result == 1){
+					System.out.println(result + 100);
+				} else if (result == 1) {
 					setDefaultCloseOperation(EXIT_ON_CLOSE);
-					System.out.println(result+200);
+					System.out.println(result + 200);
 				} else {
 					setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-					System.out.println(result+300);
+					System.out.println(result + 300);
 				}
 			}
 		});
-		
-		
+
 		pnl.setBounds(0, 0, 500, 700);
 		pnl.setLayout(null);
 		setLayout(null);
@@ -253,6 +252,7 @@ public class LottoLast extends JFrame {
 		pnl.setIcon(icon);
 		setBounds(0, 0, 500, 700);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
 	}
 
 // 숫자 크기별 이미지 넣기
@@ -317,7 +317,7 @@ public class LottoLast extends JFrame {
 			} else {
 				set.clear();
 			}
-		}     
+		}
 	}
 
 	public static void main(String[] args) {

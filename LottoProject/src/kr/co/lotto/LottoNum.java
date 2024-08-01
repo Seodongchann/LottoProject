@@ -12,9 +12,6 @@ import java.util.Map;
 
 
 public class LottoNum {
-	List<String> list; // 자동 반자동 수동
-	Map<String, List<Integer>> map; // KEY = A,B,C... List = 로또 번호
-
 	static List<String> LIST = new ArrayList<>(); // 자동 반자동 수동
 	static Map<String, List<Integer>> MAP = new HashMap<String, List<Integer>>(); // KEY = A,B,C... List = 로또 번호
 	
