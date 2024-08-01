@@ -267,10 +267,17 @@ public class LottoStart extends JFrame {
 
 							}
 						}
-						btn4.setEnabled(true);
+					}
+					btn4.setEnabled(true);
+					count =5;
+					for (int i = 0; i < lll.size(); i++) {
+						if (lll.get(i).isEnabled()== true) {
+							count--;
+						}
+					}
+					if (count == 0) {
 						btn5.setEnabled(true);
 					}
-
 				}
 			});
 
