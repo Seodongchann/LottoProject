@@ -21,6 +21,7 @@ public class LottoStart extends JFrame {
 	private static final int Max = 6;
 	private int count = 0;
 	private int[] counts = { 0, 0, 0, 0, 0 };
+	int sum = 0;
 
 	// btn = NEXT버튼
 	// btn2 = 숫자 1~45번 버튼
@@ -103,6 +104,16 @@ public class LottoStart extends JFrame {
 				btn2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						for (int i = 0; i < list2.size(); i++) {
+							sum += counts[i];
+							if (sum > 0) {
+								btn5.setEnabled(false);
+							}
+							if (sum == 0) {
+								btn5.setEnabled(true);
+							}
+
+						}
 						int[] ss = new int[list2.size()];
 						for (int i = 0; i < list2.size(); i++) {
 							for (int j = 0; j < list2.get(i).size(); j++) {
@@ -110,11 +121,13 @@ public class LottoStart extends JFrame {
 									ss[i]++;
 								}
 							}
+
 						}
+
 					}
 				});
 				list.get(j).add(btn2);
-				btn2Listener(list2, btn2);
+				btn2Listener(list2, btn2, btn5);
 
 			}
 			z = 0;
@@ -239,27 +252,23 @@ public class LottoStart extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					int countd = 0;
+
 					for (int i = 0; i < list3.size(); i++) {
 						list3.get(i).setBackground(Color.white);
 						list3.get(i).setEnabled(true);
 					}
+
 					for (int i = 0; i < list2.size(); i++) {
 						if (!btn4.getBackground().equals(Color.pink)) {
 							btn4.setBackground(Color.pink);
 						}
 						for (int j = 0; j < list2.get(i).size(); j++) {
 							if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
-								countd++;
+								
 							}
 						}
-						lll.get(i).setEnabled(true);
+						btn4.setEnabled(true);
 					}
-					if (countd == 0) {
-						btn5.setEnabled(true);
-					}
-
-					
 
 				}
 			});
@@ -342,10 +351,11 @@ public class LottoStart extends JFrame {
 
 	}
 
-	public void btn2Listener(List<List<JButton>> list2, JButton btn2) {
+	public void btn2Listener(List<List<JButton>> list2, JButton btn2, JButton btn5) {
 		btn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				if (btn2.getBackground().equals(Color.white)) {
 					btn2.setBackground(Color.pink);
 					for (int i = 0; i < list2.size(); i++) {
@@ -363,7 +373,9 @@ public class LottoStart extends JFrame {
 					}
 				} else {
 					btn2.setBackground(Color.white);
+
 				}
+
 			}
 		});
 	}
