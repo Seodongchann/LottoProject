@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -269,15 +270,6 @@ public class LottoStart extends JFrame {
 						}
 					}
 					btn4.setEnabled(true);
-					count =5;
-					for (int i = 0; i < lll.size(); i++) {
-						if (lll.get(i).isEnabled()== true) {
-							count--;
-						}
-					}
-					if (count == 0) {
-						btn5.setEnabled(true);
-					}
 				}
 			});
 
@@ -349,7 +341,11 @@ public class LottoStart extends JFrame {
 				if (LottoNum.MAP.size() > 0) {
 					dispose();
 					new LottoSecond().setVisible(true);
-
+					JOptionPane.showMessageDialog(null, "결과확인 : QR코드를 클릭하여 주세요", "필수체크 사항", JOptionPane.WARNING_MESSAGE);
+				}
+				if(LottoNum.MAP.size() == 0) {
+					
+				JOptionPane.showMessageDialog(null, "ERORR", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

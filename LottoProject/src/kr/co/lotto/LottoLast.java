@@ -37,7 +37,7 @@ public class LottoLast extends JFrame {
 		JLabel pnl = new JLabel();
 		ImageIcon icon = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lotto.png"));
 		ImageIcon icon2 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog.png"));
-//		ImageIcon icon3 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/lottoLog2.png"));
+		ImageIcon icon3 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/보너스.png"));
 		ImageIcon icon4 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/핑크원형.png"));
 		ImageIcon icon5 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/핑크원형10.png"));
 		ImageIcon icon6 = new ImageIcon(LottoLast.class.getResource("/kr/co/lotto/핑크원형20.png"));
@@ -129,10 +129,14 @@ public class LottoLast extends JFrame {
 				int a = LottoNum.MAP.get(s).get(j);
 				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
 				for (int l = 0; l < listS.size(); l++) {
-					if (LottoNum.MAP.get(s).get(j).equals(listS.get(l))) {
-						lb.setIcon(icon10);
+					if (l <= LottoNum.MAP.get(s).size() - 1) {
+						if (LottoNum.MAP.get(s).get(j).equals(listS.get(l))) {
+							lb.setIcon(icon10);
+						}
 					} else {
-
+						if (LottoNum.MAP.get(s).get(j).equals(listS.get(l))) {
+							lb.setIcon(icon3);
+						}
 					}
 				}
 				pnl.add(lb);
@@ -162,10 +166,12 @@ public class LottoLast extends JFrame {
 			String s = String.valueOf(c2);
 			for (int j = 0; j < LottoNum.MAP.get(s).size(); j++) {
 				for (int j2 = 0; j2 < listS.size(); j2++) {
-					if (LottoNum.MAP.get(s).size() <= listS.size()) {
+					// j2 가 LottoNum.MAP.get(s).size() - 1만큼 돈다
+					if (j2 <= LottoNum.MAP.get(s).size() - 1) {
 						if (LottoNum.MAP.get(s).get(j) == listS.get(j2)) {
 							clap++;
 						}
+						// j2 가 LottoNum.MAP.get(s).size를 벗어나면 돈다
 					} else {
 						if (LottoNum.MAP.get(s).get(j) == listS.get(j2)) {
 							clap1++;
@@ -245,6 +251,7 @@ public class LottoLast extends JFrame {
 		setBounds(0, 0, 500, 670);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	}
+
 // 숫자 크기별 이미지 넣기
 	private void 숫자크기별이미지(int a, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6, ImageIcon icon7, ImageIcon icon8,
 			JLabel lb) {
@@ -262,6 +269,7 @@ public class LottoLast extends JFrame {
 		char c = 'A';
 		lb.setHorizontalTextPosition(JLabel.CENTER);
 	}
+
 // 당첨 여부에 따라 메시지 출력
 	private void 당첨메시지출력(JLabel pnl, int d, Icon icon) {
 		JLabel lp = new JLabel();
@@ -324,6 +332,7 @@ public class LottoLast extends JFrame {
 			}
 		}
 	}
+
 	public static void main(String[] args) {
 		new LottoLast().setVisible(true);
 	}
