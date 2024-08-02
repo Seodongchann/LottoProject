@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.MediaTracker;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -208,59 +209,72 @@ public class LottoLast extends JFrame {
 			당첨메시지출력(pnl, 0);
 		}
 
+		if (num == 0) {
+			JLabel jj = new JLabel("첫번째");
+			pnl.add(jj);
+			jj.setBounds(10, 135, 60, 30);
+			jj.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		}
+
 		// 다시하기
 		addWindowListener(new WindowAdapter() {
-			@Override
 			public void windowClosing(WindowEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
-				System.out.println(result);
-				if (result == JOptionPane.OK_OPTION) {
+				if (num == 0) {
 					for (int j = 0; j < LottoNum.s.size(); j++) {
-						if (LottoNum.s.get(j).isVisible() == true) {
-							LottoNum.s.get(j).setVisible(false);
-						}
+						LottoNum.s.get(j).setVisible(false);
 					}
 					for (int j = 0; j < LottoNum.s2.size(); j++) {
-						if (LottoNum.s2.get(j).isVisible() == true) {
-							LottoNum.s2.get(j).setVisible(false);
-						}
+						LottoNum.s2.get(j).setVisible(false);
 					}
 					for (int j = 0; j < LottoNum.s3.size(); j++) {
-						if (LottoNum.s3.get(j).isVisible() == true) {
-							LottoNum.s3.get(j).setVisible(false);
-						}
+						LottoNum.s3.get(j).setVisible(false);
 					}
-					dispose();
-					new LottoMain().setVisible(true);
-					LottoNum.LIST.clear();
-					LottoNum.listM.get(num).clear();
-					LottoNum.SET.clear();
+					int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
+					if (result == JOptionPane.OK_OPTION) {
 
-					if (LottoNum.SET.size() < 7) {
-						Random r = new Random();
-						while (true) {
-							for (int i = 0; i < 7; i++) {
-								int a = r.nextInt(45) + 1;
-								LottoNum.SET.add(a);
-							}
-							if (LottoNum.SET.size() > 6) {
-								break;
-							} else {
-								LottoNum.SET.clear();
+						new LottoMain().setVisible(true);
+						LottoNum.LIST.clear();
+						LottoNum.listM.get(num).clear();
+						LottoNum.SET.clear();
+
+						if (LottoNum.SET.size() < 7) {
+							Random r = new Random();
+							while (true) {
+								for (int i = 0; i < 7; i++) {
+									int a = r.nextInt(45) + 1;
+									LottoNum.SET.add(a);
+								}
+								if (LottoNum.SET.size() > 6) {
+									break;
+								} else {
+									LottoNum.SET.clear();
+								}
 							}
 						}
+						dispose();
+					} else if (result == 1) {
+						setDefaultCloseOperation(EXIT_ON_CLOSE);
+					} else {
+						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 					}
-					LottoNum.count = 0;
-				} else if (result == 1) {
-					setDefaultCloseOperation(EXIT_ON_CLOSE);
 				} else {
-					setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+					int result = JOptionPane.showConfirmDialog(null, "첫번째 용지에서 선택하세요");
+					if (result == JOptionPane.OK_OPTION) {
+						dispose();
+					} else if (result == 1) {
+						dispose();
+					} else {
+						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+					}
+
 				}
 			}
 		});
 
 		pnl.setBounds(0, 0, 500, 670);
 		pnl.setLayout(null);
+
 		setLayout(null);
 		add(pnl);
 		pnl.setIcon(icon);

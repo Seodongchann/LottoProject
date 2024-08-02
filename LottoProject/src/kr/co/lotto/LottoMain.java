@@ -14,23 +14,29 @@ public class LottoMain extends JPanel {
 	Random r = new Random();
 
 	public LottoMain() {
-	
-		LottoNum.s = new ArrayList<LottoStart>();
-		String s = JOptionPane.showInputDialog("");
-		int num = Integer.parseInt(s);
-		LottoNum.count = num;
-		for (int i = 0; i < num; i++) {
-			LottoNum.s.add(new LottoStart(i));
 
+		LottoNum.s = new ArrayList<LottoStart>();
+		while (true) {
+			try {
+				String s = JOptionPane.showInputDialog("");
+				int num = Integer.parseInt(s);
+				for (int i = 0; i < num; i++) {
+					LottoNum.s.add(new LottoStart(i));
+
+				}
+				for (int i = 0; i < num; i++) {
+					LottoNum.s.get(i).setVisible(true);
+				}
+				for (int i = 0; i <= num; i++) {
+					LottoNum.listM.add(new HashMap<String, List<Integer>>());
+					LottoNum.LIST2.add(new ArrayList<String>());
+				}
+				당첨번호추첨메소드(r);
+				break;
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "메롱", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		for (int i = 0; i < num; i++) {
-			LottoNum.s.get(i).setVisible(true);
-		}
-		for (int i = 0; i <= num; i++) {
-			LottoNum.listM.add(new HashMap<String, List<Integer>>());
-			LottoNum.LIST2.add(new ArrayList<String>());
-		}
-		당첨번호추첨메소드(r);
 
 	}
 

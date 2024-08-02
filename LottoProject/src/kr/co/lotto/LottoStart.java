@@ -355,7 +355,7 @@ public class LottoStart extends JFrame {
 				}
 			}
 		});
-
+		
 		setSize(1800, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

@@ -59,7 +59,6 @@ public final class LottoSecond extends JFrame {
 
 		pnls.get(0).add(lb);
 		pnls.get(0).add(lb2);
-//		pnls.get(0).add(lbg);
 		x = 50;
 		y = 0;
 

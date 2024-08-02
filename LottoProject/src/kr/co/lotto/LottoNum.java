@@ -19,7 +19,6 @@ public class LottoNum {
 	static List<List<String>> LIST2= new ArrayList<List<String>>(); 
 	static List<Map<String, List<Integer>>> listM = new ArrayList<Map<String,List<Integer>>>();
 
-	static int count;
 	static List<LottoStart> s; 
 	static List<LottoSecond> s2 = new ArrayList<LottoSecond>(); 
 	static List<LottoLast> s3 = new ArrayList<LottoLast>(); 
