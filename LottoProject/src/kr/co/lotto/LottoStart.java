@@ -1,5 +1,6 @@
 package kr.co.lotto;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -30,9 +31,8 @@ public class LottoStart extends JFrame {
 	// btn4 = 각 패널에 있는 자동 버튼
 	// btn5 = 전체 자동 버튼
 	// btn6 = 전체 초기화버튼
-	public LottoStart() {
+	public LottoStart(int num) {
 
-//		JButton[] btn = new JButton[45];
 		Color color1 = new Color(255, 153, 255);
 		Color color2 = new Color(255, 102, 255);
 		getContentPane().setLayout(null);
@@ -311,8 +311,9 @@ public class LottoStart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				char gs = 'A';
-				Map<String, Integer> map = new HashMap<>();
+				Map<String, List<Integer>> map = new HashMap<>();
 				List<List<Integer>> li = new ArrayList<List<Integer>>();
 				for (int i = 0; i < list2.size(); i++) {
 					List<Integer> s = new ArrayList<Integer>();
@@ -324,35 +325,40 @@ public class LottoStart extends JFrame {
 					li.add(s);
 					if (li.get(i).size() >= 6) {
 						String ss = String.valueOf(gs++);
-						LottoNum.MAP.put(ss, li.get(i));
+						map.put(ss, li.get(i));
 						if (lll.get(i).getBackground().equals(Color.pink)) {
-							LottoNum.LIST.add("수동");
+							LottoNum.LIST2.get(num).add("수동");
 						} else if (lll.get(i).getBackground().equals(color2)) {
-							LottoNum.LIST.add("자동");
+							LottoNum.LIST2.get(num).add("자동");
 							count++;
-							count++;
+
 						} else if (lll.get(i).getBackground().equals(color1)) {
 							count++;
-							LottoNum.LIST.add("반자동");
+							LottoNum.LIST2.get(num).add("반자동");
 						}
 					}
 
 				}
-				if (LottoNum.MAP.size() > 0) {
+				LottoNum.listM.get(num).putAll(map);	
+				
+				if (map.size() > 0) {
 					dispose();
-					new LottoSecond().setVisible(true);
-					JOptionPane.showMessageDialog(null, "결과확인 : QR코드를 클릭하여 주세요", "필수체크 사항", JOptionPane.WARNING_MESSAGE);
+					LottoSecond ls = new LottoSecond(num);
+					ls.setVisible(true);
+					LottoNum.s2.add(ls);
+					JOptionPane.showMessageDialog(null, "결과확인 : QR코드를 클릭하여 주세요", "필수체크 사항",
+							JOptionPane.WARNING_MESSAGE);
 				}
-				if(LottoNum.MAP.size() == 0) {
-					
-				JOptionPane.showMessageDialog(null, "ERORR", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+
+				if (map.size() == 0) {
+					JOptionPane.showMessageDialog(null, "ERORR", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
 		setSize(1800, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setLocationRelativeTo(null);
 	}
 
 	public void btn2Listener(List<List<JButton>> list2, JButton btn2, JButton btn5) {
@@ -384,7 +390,4 @@ public class LottoStart extends JFrame {
 		});
 	}
 
-	public static void main(String[] args) {
-		new LottoStart().setVisible(true);
-	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 //import lombok.AllArgsConstructor;
 //import lombok.Builder;
@@ -12,8 +14,15 @@ import java.util.Map;
 
 
 public class LottoNum {
+	static Set<Integer> SET = new TreeSet<Integer>();
 	static List<String> LIST = new ArrayList<>(); // 자동 반자동 수동
-	static Map<String, List<Integer>> MAP = new HashMap<String, List<Integer>>(); // KEY = A,B,C... List = 로또 번호
-	
+	static List<List<String>> LIST2= new ArrayList<List<String>>(); 
+	static List<Map<String, List<Integer>>> listM = new ArrayList<Map<String,List<Integer>>>();
 
+	static int count;
+	static List<LottoStart> s; 
+	static List<LottoSecond> s2 = new ArrayList<LottoSecond>(); 
+	static List<LottoLast> s3 = new ArrayList<LottoLast>(); 
+	
+	
 }

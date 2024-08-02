@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +18,7 @@ import javax.swing.event.AncestorListener;
 
 public final class LottoSecond extends JFrame {
 
-	public LottoSecond() {
-		
+	public LottoSecond(int num) {
 
 		int x = 0;
 		int y = 0;
@@ -40,19 +41,19 @@ public final class LottoSecond extends JFrame {
 		ImageIcon icon4 = new ImageIcon(LottoSecond.class.getResource("사이드2.png"));
 
 		JLabel lb = new JLabel();
-//		JLabel lbg = new JLabel("↑결과확인↑");
+		JLabel lbg = new JLabel("↑결과확인↑");
 		lb.setIcon(icon);
 		lb.setBounds(0, 0, 320, 200);
 		JButton lb2 = new JButton();
 		lb2.setIcon(icon2);
 		lb2.setBounds(350, 50, 85, 85);
-//		lbg.setBounds(360, 130, 85, 40);
+		lbg.setBounds(360, 130, 85, 40);
 		lb2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				 new LottoLast().setVisible(true);
+				new LottoLast(num).setVisible(true);
 			}
 		});
 
@@ -61,32 +62,41 @@ public final class LottoSecond extends JFrame {
 //		pnls.get(0).add(lbg);
 		x = 50;
 		y = 0;
-		for (int i = 0; i < LottoNum.MAP.size(); i++) {
-			char c = 'A';
-			char s = (char) (c + i);
-			JLabel lbl = new JLabel(String.valueOf(s));
-			
-			JLabel lbl2 = new JLabel(LottoNum.LIST.get(i));
 
-			lbl.setBounds(x, y, 40, 40);
-			lbl2.setBounds(x += 50, y, 40, 40);
-			for (int j = 0; j < LottoNum.MAP.get(String.valueOf(s)).size(); j++) {
-				String s2 = String.valueOf(LottoNum.MAP.get(String.valueOf(s)).get(j));
-				JLabel lbls = new JLabel(s2);
-				lbls.setFont(new Font("", Font.BOLD, 15));
-				x += 50;
-				lbls.setBounds(x, y, 40, 40);
-				pnls.get(1).add(lbls);
+		try {
+			for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
+				char c = 'A';
+				char s = (char) (c + i);
+				JLabel lbl = new JLabel(String.valueOf(s));
+
+				JLabel lbl2 = new JLabel(LottoNum.LIST2.get(num).get(i));
+
+				lbl.setBounds(x, y, 40, 40);
+				lbl2.setBounds(x += 50, y, 40, 40);
+				for (int j = 0; j < LottoNum.listM.get(num).get(String.valueOf(s)).size(); j++) {
+					String s2 = String.valueOf(LottoNum.listM.get(num).get(String.valueOf(s)).get(j));
+					JLabel lbls = new JLabel(s2);
+					lbls.setFont(new Font("", Font.BOLD, 15));
+					x += 50;
+					lbls.setBounds(x, y, 40, 40);
+					pnls.get(1).add(lbls);
+				}
+				x = 50;
+				y += 40;
+				pnls.get(1).add(lbl);
+				pnls.get(1).add(lbl2);
 			}
-			x = 50;
-			y += 40;
-			pnls.get(1).add(lbl);
-			pnls.get(1).add(lbl2);
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("이건 불가");
+			LottoLast ll = new LottoLast(num);
+			ll.setVisible(true);
+			LottoNum.s3.add(ll);
 		}
+
 		pnls.get(1).setBackground(Color.white);
 
 		JLabel lb3 = new JLabel();
-		JLabel lb4 = new JLabel("$  " + (LottoNum.MAP.size() * 1000));
+		JLabel lb4 = new JLabel("$  " + (LottoNum.listM.get(num).size() * 1000));
 		lb4.setFont(new Font("", Font.BOLD, 25));
 
 		lb3.setBounds(0, 0, 500, 200);
@@ -95,8 +105,7 @@ public final class LottoSecond extends JFrame {
 
 		pnls.get(2).add(lb4);
 		pnls.get(2).add(lb3);
-		
-		
+
 		JPanel pn = new JPanel();
 		JLabel ilbl = new JLabel();
 		pn.setLayout(null);
@@ -104,13 +113,14 @@ public final class LottoSecond extends JFrame {
 		ilbl.setBounds(0, 0, 41, 600);
 		ilbl.setIcon(icon4);
 		pn.add(ilbl);
-		
+
 		add(pn);
 		setSize(500, 630);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 	}
 
 	public static void main(String[] args) {
-		new LottoSecond().setVisible(true);
+		// new LottoSecond().setVisible(true);
 	}
 }
