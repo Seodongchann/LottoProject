@@ -233,7 +233,7 @@ public class LottoLast extends JFrame {
 					if (result == JOptionPane.OK_OPTION) {
 
 						new LottoMain().setVisible(true);
-						LottoNum.LIST.clear();
+						LottoNum.LIST2.clear();
 						LottoNum.listM.get(num).clear();
 						LottoNum.SET.clear();
 

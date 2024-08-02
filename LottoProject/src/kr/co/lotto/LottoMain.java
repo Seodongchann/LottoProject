@@ -18,16 +18,11 @@ public class LottoMain extends JPanel {
 		LottoNum.s = new ArrayList<LottoStart>();
 		while (true) {
 			try {
-				String s = JOptionPane.showInputDialog("");
+				String s = JOptionPane.showInputDialog("몇장을 사시겠습니까?");
 				int num = Integer.parseInt(s);
 				for (int i = 0; i < num; i++) {
 					LottoNum.s.add(new LottoStart(i));
-
-				}
-				for (int i = 0; i < num; i++) {
 					LottoNum.s.get(i).setVisible(true);
-				}
-				for (int i = 0; i <= num; i++) {
 					LottoNum.listM.add(new HashMap<String, List<Integer>>());
 					LottoNum.LIST2.add(new ArrayList<String>());
 				}

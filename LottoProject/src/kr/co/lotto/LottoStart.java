@@ -76,7 +76,8 @@ public class LottoStart extends JFrame {
 		int[] ss = new int[6];
 		List<JPanel> list = new ArrayList<JPanel>();
 		List<List<JButton>> list2 = new ArrayList<List<JButton>>();
-		List<JButton> lll = new ArrayList<JButton>();
+		List<JButton> listC = new ArrayList<JButton>();
+		List<JButton> listD = new ArrayList<JButton>();
 		for (int j = 0; j < 5; j++) {
 
 			JPanel btnpnl = new JPanel();
@@ -101,34 +102,8 @@ public class LottoStart extends JFrame {
 					f += 40;
 				}
 
-				// 숫자 버튼을 누르면 핑크색으로 바꾸는 기능
-				btn2.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						for (int i = 0; i < list2.size(); i++) {
-							sum += counts[i];
-							if (sum > 0) {
-								btn5.setEnabled(false);
-							}
-							if (sum == 0) {
-								btn5.setEnabled(true);
-							}
-
-						}
-						int[] ss = new int[list2.size()];
-						for (int i = 0; i < list2.size(); i++) {
-							for (int j = 0; j < list2.get(i).size(); j++) {
-								if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
-									ss[i]++;
-								}
-							}
-
-						}
-
-					}
-				});
 				list.get(j).add(btn2);
-				btn2Listener(list2, btn2, btn5);
+				btn2Listener(list2, btn2);
 
 			}
 			z = 0;
@@ -145,47 +120,8 @@ public class LottoStart extends JFrame {
 			btn4.setSize(75, 20);
 			btn4.setBackground(Color.PINK);
 			list.get(j).add(btn4);
-
-			// 자동 버튼 기능 구현
-			btn4.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					btn4.setEnabled(false);
-					btn5.setEnabled(false);
-					Random r = new Random();
-					for (int i = 0; i < list3.size(); i++) {
-						if (list3.get(i).getBackground().equals(Color.pink)) {
-							count++;
-						}
-						list3.get(i).setEnabled(false);
-					}
-					if (count == 0) {
-						btn4.setBackground(color2);
-					}
-					if (count > 0) {
-						btn4.setBackground(color1);
-
-					}
-
-					for (int i = 0; i < 6 - count; i++) {
-						int a = r.nextInt(45) + 1;
-						for (int j = 0; j < list3.size(); j++) {
-							if (list3.get(j).getText().equals(String.valueOf(a))
-									&& list3.get(j).getBackground().equals(Color.pink)) {
-								i--;
-							}
-							if (list3.get(j).getText().equals(String.valueOf(a))
-									&& list3.get(j).getBackground().equals(Color.white)) {
-								list3.get(j).setBackground(Color.pink);
-							}
-						}
-
-					}
-					count = 0;
-
-				}
-			});
-			lll.add(btn4);
+			listC.add(btn4);
+			btn4Listener(listC, btn4, list3, btn5, color1, color2);
 
 			// 전체 자동 기능 구현
 			btn5.addActionListener(new ActionListener() {
@@ -236,7 +172,7 @@ public class LottoStart extends JFrame {
 						if (!btn4.getBackground().equals(Color.pink)) {
 							btn4.setBackground(Color.pink);
 						}
-						lll.get(i).setEnabled(true);
+						listC.get(i).setEnabled(true);
 					}
 					for (int i = 0; i < list3.size(); i++) {
 						list3.get(i).setBackground(Color.white);
@@ -249,30 +185,9 @@ public class LottoStart extends JFrame {
 			btn3.setSize(75, 20);
 			btn3.setBackground(Color.pink);
 			list.get(j).add(btn3);
-			btn3.addActionListener(new ActionListener() {
+			listD.add(btn3);
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-
-					for (int i = 0; i < list3.size(); i++) {
-						list3.get(i).setBackground(Color.white);
-						list3.get(i).setEnabled(true);
-					}
-
-					for (int i = 0; i < list2.size(); i++) {
-						if (!btn4.getBackground().equals(Color.pink)) {
-							btn4.setBackground(Color.pink);
-						}
-						for (int j = 0; j < list2.get(i).size(); j++) {
-							if (list2.get(i).get(j).getBackground().equals(Color.pink)) {
-
-							}
-						}
-					}
-					btn4.setEnabled(true);
-				}
-			});
-
+			btn3Listener(list2, list3, listC, btn3, btn4, btn5, listD);
 			getContentPane().add(btnpnl);
 
 		}
@@ -326,21 +241,21 @@ public class LottoStart extends JFrame {
 					if (li.get(i).size() >= 6) {
 						String ss = String.valueOf(gs++);
 						map.put(ss, li.get(i));
-						if (lll.get(i).getBackground().equals(Color.pink)) {
+						if (listC.get(i).getBackground().equals(Color.pink)) {
 							LottoNum.LIST2.get(num).add("수동");
-						} else if (lll.get(i).getBackground().equals(color2)) {
+						} else if (listC.get(i).getBackground().equals(color2)) {
 							LottoNum.LIST2.get(num).add("자동");
 							count++;
 
-						} else if (lll.get(i).getBackground().equals(color1)) {
+						} else if (listC.get(i).getBackground().equals(color1)) {
 							count++;
 							LottoNum.LIST2.get(num).add("반자동");
 						}
 					}
 
 				}
-				LottoNum.listM.get(num).putAll(map);	
-				
+				LottoNum.listM.get(num).putAll(map);
+
 				if (map.size() > 0) {
 					dispose();
 					LottoSecond ls = new LottoSecond(num);
@@ -355,13 +270,14 @@ public class LottoStart extends JFrame {
 				}
 			}
 		});
-		
+
 		setSize(1800, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
 
-	public void btn2Listener(List<List<JButton>> list2, JButton btn2, JButton btn5) {
+	// 수동 버튼 클릭 이벤트
+	public void btn2Listener(List<List<JButton>> list2, JButton btn2) {
 		btn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -383,11 +299,105 @@ public class LottoStart extends JFrame {
 					}
 				} else {
 					btn2.setBackground(Color.white);
+					for (int i = 0; i < list2.size(); i++) {
+						for (int j = 0; j < list2.get(i).size(); j++) {
+							if (list2.get(i).get(j).equals(btn2)) {
+								counts[i]--;
+							}
+						}
+					}
+				}
+				for (int i = 0; i < counts.length; i++) {
+					System.out.println(counts[i]);
+				}
+			}
+		});
+	}
 
+	// 각 패널의 초기화 이벤트 메소드
+	public void btn3Listener(List<List<JButton>> list2, List<JButton> list3, List<JButton> lll, JButton btn3,
+			JButton btn4, JButton btn5, List<JButton> listD) {
+		btn3.addActionListener(new ActionListener() {
+			int ss = 0;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				for (int i = 0; i < list3.size(); i++) {
+					list3.get(i).setBackground(Color.white);
+					list3.get(i).setEnabled(true);
+				}
+				// btn4의 색상이 pink가 아니라면
+				if (!btn4.getBackground().equals(Color.pink)) {
+					btn4.setBackground(Color.pink);
+				}
+				btn4.setEnabled(true);
+				// 각 패널의 자동버튼이 true면 전체 자동버튼 true로 변경
+				for (int i = 0; i < lll.size(); i++) {
+					if (lll.get(i).isEnabled() == false) {
+						ss++;
+					}
+					if (listD.get(i).equals(btn3)) {
+						counts[i] = 0;
+					}
+					System.out.println(counts[i]);
+				}
+				if (ss == 0) {
+					btn5.setEnabled(true);
 				}
 
 			}
 		});
 	}
 
+	// 자동
+	public void btn4Listener(List<JButton> listC, JButton btn4, List<JButton> list3, JButton btn5, Color color1,
+			Color color2) {
+		btn4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btn4.setEnabled(false);
+				btn5.setEnabled(false);
+				Random r = new Random();
+
+				for (int i = 0; i < listC.size(); i++) {
+					if (listC.get(i).equals(btn4)) {
+						counts[i] = 6;
+					}
+					System.out.println(counts[i]);
+				}
+
+				for (int i = 0; i < list3.size(); i++) {
+					if (list3.get(i).getBackground().equals(Color.pink)) {
+						count++;
+					}
+					list3.get(i).setEnabled(false);
+				}
+				if (count == 0) {
+					btn4.setBackground(color2);
+				}
+				if (count > 0) {
+					btn4.setBackground(color1);
+
+				}
+
+				for (int i = 0; i < 6 - count; i++) {
+					int a = r.nextInt(45) + 1;
+					for (int j = 0; j < list3.size(); j++) {
+						if (list3.get(j).getText().equals(String.valueOf(a))
+								&& list3.get(j).getBackground().equals(Color.pink)) {
+							i--;
+						}
+						if (list3.get(j).getText().equals(String.valueOf(a))
+								&& list3.get(j).getBackground().equals(Color.white)) {
+							list3.get(j).setBackground(Color.pink);
+						}
+					}
+
+				}
+				count = 0;
+
+			}
+		});
+	}
 }

@@ -15,7 +15,6 @@ import java.util.TreeSet;
 
 public class LottoNum {
 	static Set<Integer> SET = new TreeSet<Integer>();
-	static List<String> LIST = new ArrayList<>(); // 자동 반자동 수동
 	static List<List<String>> LIST2= new ArrayList<List<String>>(); 
 	static List<Map<String, List<Integer>>> listM = new ArrayList<Map<String,List<Integer>>>();
 
