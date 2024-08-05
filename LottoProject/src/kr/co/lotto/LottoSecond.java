@@ -61,13 +61,12 @@ public final class LottoSecond extends JFrame {
 						LottoNum.s3.add(ll);
 						dispose();
 						LottoNum.s2.get(i).setVisible(false);
-						LottoNum.s3.get(i).setVisible(true);
 					
 					}
-//					for (int i = 0; i < LottoNum.s3.size(); i++) {
-//
-//						
-//					}
+					for (int i = 0; i < LottoNum.s3.size(); i++) {
+
+						LottoNum.s3.get(i).setVisible(true);
+					}
 					
 				}
 

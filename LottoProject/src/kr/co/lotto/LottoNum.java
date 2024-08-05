@@ -23,5 +23,4 @@ public class LottoNum {
 	static List<LottoSecond> s2 = new ArrayList<LottoSecond>(); 
 	static List<LottoLast> s3 = new ArrayList<LottoLast>(); 
 	
-	
 }
