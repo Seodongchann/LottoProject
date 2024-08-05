@@ -221,12 +221,15 @@ public class LottoLast extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				if (num == 0) {
 					for (int j = 0; j < LottoNum.s.size(); j++) {
+						dispose();
 						LottoNum.s.get(j).setVisible(false);
 					}
 					for (int j = 0; j < LottoNum.s2.size(); j++) {
+						dispose();
 						LottoNum.s2.get(j).setVisible(false);
 					}
 					for (int j = 0; j < LottoNum.s3.size(); j++) {
+						dispose();
 						LottoNum.s3.get(j).setVisible(false);
 					}
 					int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
@@ -236,7 +239,8 @@ public class LottoLast extends JFrame {
 						LottoNum.LIST2.clear();
 						LottoNum.listM.get(num).clear();
 						LottoNum.SET.clear();
-
+						LottoNum.count = 0;
+						LottoNum.count2 = 0;
 						if (LottoNum.SET.size() < 7) {
 							Random r = new Random();
 							while (true) {
@@ -257,18 +261,19 @@ public class LottoLast extends JFrame {
 					} else {
 						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 					}
-				} else {
-
-					int result = JOptionPane.showConfirmDialog(null, "첫번째 용지에서 선택하세요");
-					if (result == JOptionPane.OK_OPTION) {
-						dispose();
-					} else if (result == 1) {
-						dispose();
-					} else {
-						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-					}
-
 				}
+//				else {
+//
+//					int result = JOptionPane.showConfirmDialog(null, "첫번째 용지에서 선택하세요");
+//					if (result == JOptionPane.OK_OPTION) {
+//						dispose();
+//					} else if (result == 1) {
+//						dispose();
+//					} else {
+//						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//					}
+//
+//				}
 			}
 		});
 
