@@ -39,23 +39,15 @@ public class LottoStart extends JFrame {
 
 		JPanel p = new JPanel();
 		JLabel lbl = new JLabel();
-
-		JButton btn5 = new JButton("자동");
-		btn5.setBackground(Color.pink);
-		btn5.setBounds(50, 55, 75, 30);
-		btn5.setFont(new Font(" ", Font.BOLD, 12));
-		p.add(btn5);
-
-		JButton btn6 = new JButton("초기화");
-		btn6.setBackground(Color.pink);
-		btn6.setBounds(50, 85, 75, 30);
-		btn6.setFont(new Font(" ", Font.BOLD, 12));
-		p.add(btn6);
-
-		JButton btn = new JButton("N E X T");
-		btn.setBackground(Color.pink);
-		btn.setBounds(40, 0, 120, 50);
-		btn.setFont(new Font(" ", Font.BOLD, 20));
+		
+		//전체자동버튼 설정값
+		JButton btn5 = FullAuto(p);
+		
+		//초기화 버튼 설정값
+		JButton btn6 = RestBtn(p);
+		
+		//Next버튼 설정값
+		JButton btn = NextBtn();
 		ImageIcon icon = new ImageIcon(LottoStart.class.getResource("asdfg.png"));
 		lbl.setIcon(icon);
 		p.setLayout(null);
@@ -113,85 +105,22 @@ public class LottoStart extends JFrame {
 			int boxW = 150;
 			int boxH = 30;
 
-			// 이건 버튼으로 5개 만들기 verison
-			JButton btn4 = new JButton("자동");
-			btn4.setBounds(225, 400, boxW, boxH);
-			btn4.setSize(75, 20);
-			btn4.setBackground(Color.PINK);
-			list.get(j).add(btn4);
-			listC.add(btn4);
+			// 버튼으로 5개 만들기 
+			JButton btn4 = AutoBtn(list, listC, j, boxW, boxH);
+			
+			// 각 패널에있는 자동버튼 출력기능
 			btn4Listener(listC, btn4, list3, btn5, color1, color2);
 
 			// 전체 자동 기능 구현
-			btn5.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					btn5.setEnabled(false);
-					btn4.setEnabled(false);
-					Random r = new Random();
-					for (int i = 0; i < list3.size(); i++) {
-						if (list3.get(i).getBackground().equals(Color.pink)) {
-							count++;
-						}
-						list3.get(i).setEnabled(false);
-					}
-					if (count == 0) {
-						btn4.setBackground(color2);
-					}
-					if (count > 0) {
-						btn4.setBackground(color1);
-
-					}
-
-					for (int i = 0; i < 6 - count; i++) {
-						int a = r.nextInt(45) + 1;
-						for (int j = 0; j < list3.size(); j++) {
-							if (list3.get(j).getText().equals(String.valueOf(a))
-									&& list3.get(j).getBackground().equals(Color.pink)) {
-								i--;
-							}
-							if (list3.get(j).getText().equals(String.valueOf(a))
-									&& list3.get(j).getBackground().equals(Color.white)) {
-								list3.get(j).setBackground(Color.pink);
-							}
-						}
-
-					}
-					count = 0;
-					for (int i = 0; i < list2.size(); i++) {
-					}
-				}
-			});
+			FullAutomatic(color1, color2, btn5, list2, list3, btn4);
 			// 초기화 버튼
-			btn6.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					btn5.setEnabled(true);
-					for (int i = 0; i < list2.size(); i++) {
-						if (!btn4.getBackground().equals(Color.pink)) {
-							btn4.setBackground(Color.pink);
-						}
-						listC.get(i).setEnabled(true);
-					}
-					for (int i = 0; i < list3.size(); i++) {
-						list3.get(i).setBackground(Color.white);
-						list3.get(i).setEnabled(true);
-					}
-				}
-			});
-			JButton btn3 = new JButton("초기화");
-			btn3.setBounds(150, 400, boxW, boxH);
-			btn3.setSize(75, 20);
-			btn3.setBackground(Color.pink);
-			list.get(j).add(btn3);
-			listD.add(btn3);
-
-			btn3Listener(list2, list3, listC, btn3, btn4, btn5, listD);
-			getContentPane().add(btnpnl);
+			RestBtn(btn5, btn6, list2, listC, list3, btn4);
+			// 초기화 버튼 세팅
+			ResetBtnSetting(btn5, list, list2, listC, listD, j, btnpnl, list3, boxW, boxH, btn4);
 
 		}
 
-		// ABCDE 가격표 만들기
+		// ABCDE / 가격표 만들기
 		int lblX = 20;
 		int lblW = 100;
 		int lblH = 50;
@@ -199,28 +128,157 @@ public class LottoStart extends JFrame {
 			char c = 'A';
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
-			JLabel tp = new JLabel();
-			tp.setHorizontalAlignment(JLabel.CENTER);
-			tp.setFont(new Font(" ", Font.BOLD, 20));
-			tp.setText(s);
-			tp.setBounds(0, 0, lblW, lblH);
-			tp.setSize(65, 50);
-			list.get(i).add(tp);
-			tp.setBorder(new LineBorder(Color.gray));
+			Tf(list, lblW, lblH, i, s);
 
-			JLabel tp2 = new JLabel();
-			tp2.setText("1,000원");
-			tp2.setFont(new Font(" ", Font.BOLD, 20));
-			tp2.setBounds(65, 0, lblW, lblH);
-			tp2.setSize(259, 50);
-			tp2.setOpaque(true);
-			tp2.setBackground(Color.pink);
-			tp2.setHorizontalAlignment(JLabel.CENTER);
-			list.get(i).add(tp2);
-			tp2.setBorder(new LineBorder(Color.gray));
-			list.get(i).setBorder(new LineBorder(Color.pink));
+			Tf2(list, lblW, lblH, i);
 		}
+		//NEXT버튼 출력메소드
+		NextBtnPrint(num, color1, color2, btn, list2, listC);
 
+		setSize(1800, 500);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+	}
+
+	private JButton NextBtn() {
+		JButton btn = new JButton("N E X T");
+		btn.setBackground(Color.pink);
+		btn.setBounds(40, 0, 120, 50);
+		btn.setFont(new Font(" ", Font.BOLD, 20));
+		return btn;
+	}
+
+	private JButton FullAuto(JPanel p) {
+		JButton btn5 = new JButton("자동");
+		btn5.setBackground(Color.pink);
+		btn5.setBounds(50, 55, 75, 30);
+		btn5.setFont(new Font(" ", Font.BOLD, 12));
+		p.add(btn5);
+		return btn5;
+	}
+
+	private JButton RestBtn(JPanel p) {
+		JButton btn6 = new JButton("초기화");
+		btn6.setBackground(Color.pink);
+		btn6.setBounds(50, 85, 75, 30);
+		btn6.setFont(new Font(" ", Font.BOLD, 12));
+		p.add(btn6);
+		return btn6;
+	}
+
+	private JButton AutoBtn(List<JPanel> list, List<JButton> listC, int j, int boxW, int boxH) {
+		JButton btn4 = new JButton("자동");
+		btn4.setBounds(225, 400, boxW, boxH);
+		btn4.setSize(75, 20);
+		btn4.setBackground(Color.PINK);
+		list.get(j).add(btn4);
+		listC.add(btn4);
+		return btn4;
+	}
+
+	private void FullAutomatic(Color color1, Color color2, JButton btn5, List<List<JButton>> list2, List<JButton> list3,
+			JButton btn4) {
+		btn5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				btn5.setEnabled(false);
+				btn4.setEnabled(false);
+				Random r = new Random();
+				for (int i = 0; i < list3.size(); i++) {
+					if (list3.get(i).getBackground().equals(Color.pink)) {
+						count++;
+					}
+					list3.get(i).setEnabled(false);
+				}
+				if (count == 0) {
+					btn4.setBackground(color2);
+				}
+				if (count > 0) {
+					btn4.setBackground(color1);
+
+				}
+
+				for (int i = 0; i < 6 - count; i++) {
+					int a = r.nextInt(45) + 1;
+					for (int j = 0; j < list3.size(); j++) {
+						if (list3.get(j).getText().equals(String.valueOf(a))
+								&& list3.get(j).getBackground().equals(Color.pink)) {
+							i--;
+						}
+						if (list3.get(j).getText().equals(String.valueOf(a))
+								&& list3.get(j).getBackground().equals(Color.white)) {
+							list3.get(j).setBackground(Color.pink);
+						}
+					}
+
+				}
+				count = 0;
+				for (int i = 0; i < list2.size(); i++) {
+				}
+			}
+		});
+	}
+
+	private void RestBtn(JButton btn5, JButton btn6, List<List<JButton>> list2, List<JButton> listC,
+			List<JButton> list3, JButton btn4) {
+		btn6.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btn5.setEnabled(true);
+				for (int i = 0; i < list2.size(); i++) {
+					if (!btn4.getBackground().equals(Color.pink)) {
+						btn4.setBackground(Color.pink);
+					}
+					listC.get(i).setEnabled(true);
+				}
+				for (int i = 0; i < list3.size(); i++) {
+					list3.get(i).setBackground(Color.white);
+					list3.get(i).setEnabled(true);
+				}
+			}
+		});
+	}
+
+	private void ResetBtnSetting(JButton btn5, List<JPanel> list, List<List<JButton>> list2, List<JButton> listC,
+			List<JButton> listD, int j, JPanel btnpnl, List<JButton> list3, int boxW, int boxH, JButton btn4) {
+		JButton btn3 = new JButton("초기화");
+		btn3.setBounds(150, 400, boxW, boxH);
+		btn3.setSize(75, 20);
+		btn3.setBackground(Color.pink);
+		list.get(j).add(btn3);
+		listD.add(btn3);
+
+		btn3Listener(list2, list3, listC, btn3, btn4, btn5, listD);
+		getContentPane().add(btnpnl);
+	}
+
+	private void Tf(List<JPanel> list, int lblW, int lblH, int i, String s) {
+		JLabel tf = new JLabel();
+		tf.setHorizontalAlignment(JLabel.CENTER);
+		tf.setFont(new Font(" ", Font.BOLD, 20));
+		tf.setText(s);
+		tf.setBounds(0, 0, lblW, lblH);
+		tf.setSize(65, 50);
+		list.get(i).add(tf);
+		tf.setBorder(new LineBorder(Color.gray));
+	}
+
+	private void Tf2(List<JPanel> list, int lblW, int lblH, int i) {
+		JLabel tf2 = new JLabel();
+		tf2.setText("1,000원");
+		tf2.setFont(new Font(" ", Font.BOLD, 20));
+		tf2.setBounds(65, 0, lblW, lblH);
+		tf2.setSize(259, 50);
+		tf2.setOpaque(true);
+		tf2.setBackground(Color.pink);
+		tf2.setHorizontalAlignment(JLabel.CENTER);
+		list.get(i).add(tf2);
+		tf2.setBorder(new LineBorder(Color.gray));
+		list.get(i).setBorder(new LineBorder(Color.pink));
+	}
+
+	private void NextBtnPrint(int num, Color color1, Color color2, JButton btn, List<List<JButton>> list2,
+			List<JButton> listC) {
 		btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -270,10 +328,6 @@ public class LottoStart extends JFrame {
 				}
 			}
 		});
-
-		setSize(1800, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
 	}
 
 	// 수동 버튼 클릭 이벤트
@@ -350,7 +404,7 @@ public class LottoStart extends JFrame {
 		});
 	}
 
-	// 자동
+	// 각 패널에있는 자동버튼 출력기능 
 	public void btn4Listener(List<JButton> listC, JButton btn4, List<JButton> list3, JButton btn5, Color color1,
 			Color color2) {
 		btn4.addActionListener(new ActionListener() {

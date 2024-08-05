@@ -26,6 +26,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+import com.sun.javafx.embed.swing.Disposer;
+
 public class LottoLast extends JFrame {
 
 	public LottoLast(int num) {
@@ -59,77 +62,11 @@ public class LottoLast extends JFrame {
 			listS.add(i);
 		}
 
-// 당첨 번호 출력 + 보너스 번호 출력
-		int x = 30;
-		int y = 155;
-		int count = 0;
-		for (int i = 0; i < listS.size(); i++) {
-			char c2 = (char) (c + i);
-			String s = String.valueOf(c2);
-			if (i == listS.size() - 1) {
-				x += 10;
-				JLabel lb2 = new JLabel();
-				lb2.setText("보너스");
-				lb2.setBounds(x, y, 60, 60);
-				lb2.setHorizontalTextPosition(JLabel.CENTER);
-				lb2.setForeground(Color.BLACK);
-				lb2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-				pnl.add(lb2);
-				x += 53;
-			}
-
-			JLabel lb2 = new JLabel();
-			lb2.setText("" + listS.get(i));
-			lb2.setHorizontalTextPosition(JLabel.CENTER);
-			lb2.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-			lb2.setForeground(Color.WHITE);
-			lb2.setBounds(x, y, 60, 60);
-			pnl.add(lb2);
-			// 숫자 크기별 이미 넣기
-			int a = listS.get(i);
-			숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
-			x += 53;
-		}
+		// 당첨 번호 출력 + 보너스 번호 출력
+		WinningNumberPrint(pnl, icon4, icon5, icon6, icon7, icon8, c, listS);
 
 		// 유저정보 출력
-		int x1 = 145;
-		int y1 = 370;
-		for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
-			char c2 = (char) (c + i);
-			String s = String.valueOf(c2);
-			JLabel lb1 = new JLabel();
-			lb1.setText("" + s);
-			lb1.setBounds(x1 - 110, y1 - 10, 60, 60);
-			lb1.setFont(new Font(" ", Font.BOLD, 15));
-			lb1.setHorizontalTextPosition(JLabel.RIGHT);
-			lb1.setForeground(Color.BLACK);
-			pnl.add(lb1);
-			for (int j = 0; j < LottoNum.listM.get(num).get(s).size(); j++) {
-				JLabel lb = new JLabel();
-				lb.setText("" + LottoNum.listM.get(num).get(s).get(j));
-				lb.setBounds(x1, y1, 40, 40);
-				lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-				lb.setForeground(Color.WHITE);
-				lb.setHorizontalTextPosition(JLabel.CENTER);
-				int a = LottoNum.listM.get(num).get(s).get(j);
-				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
-				for (int l = 0; l < listS.size(); l++) {
-					if (l <= LottoNum.listM.get(num).get(s).size() - 1) {
-						if (LottoNum.listM.get(num).get(s).get(j).equals(listS.get(l))) {
-							lb.setIcon(icon10);
-						}
-					} else {
-						if (LottoNum.listM.get(num).get(s).get(j).equals(listS.get(l))) {
-							lb.setIcon(icon3);
-						}
-					}
-				}
-				pnl.add(lb);
-				x1 += 55;
-			}
-			x1 -= (55 * LottoNum.listM.get(num).get(s).size());
-			y1 += 51;
-		}
+		UserInfromationPrint(num, pnl, icon3, icon4, icon5, icon6, icon7, icon8, icon10, c, listS);
 
 		// 당첨에 따라 출력
 		int first = 0;
@@ -139,6 +76,7 @@ public class LottoLast extends JFrame {
 		int five = 0;
 		int mess = 0;
 		// 당첨 여부 조회
+
 		// 당첨 번호와 조회
 		int clap = 0;
 		// 보너스 번호 추가 조회
@@ -146,6 +84,26 @@ public class LottoLast extends JFrame {
 		int x2 = 70;
 		int y2 = 370;
 		// 당첨번호 조회 메소드
+		WinningNumberCheck(num, pnl, c, listS, first, second, third, four, five, mess, clap, clap1, x2, y2);
+
+
+		pnl.setBounds(0, 0, 500, 670);
+		pnl.setLayout(null);
+
+		setLayout(null);
+		add(pnl);
+		pnl.setIcon(icon);
+		setBounds(0, 0, 500, 670);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setLocationRelativeTo(null);
+		// 다시하기
+		AgainBtn();
+
+	}
+
+	// 당첨번호 확인 메소드
+	private void WinningNumberCheck(int num, JLabel pnl, char c, List<Integer> listS, int first, int second, int third,
+			int four, int five, int mess, int clap, int clap1, int x2, int y2) {
 		for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
 			char c2 = (char) (c + i);
 			String s = String.valueOf(c2);
@@ -215,32 +173,110 @@ public class LottoLast extends JFrame {
 			jj.setBounds(10, 135, 60, 30);
 			jj.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		}
+	}
 
-		// 다시하기
+	// 당첨번호 출력 메소드
+	private void WinningNumberPrint(JLabel pnl, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6, ImageIcon icon7,
+			ImageIcon icon8, char c, List<Integer> listS) {
+		int x = 30;
+		int y = 155;
+		int count = 0;
+		for (int i = 0; i < listS.size(); i++) {
+			char c2 = (char) (c + i);
+			String s = String.valueOf(c2);
+			if (i == listS.size() - 1) {
+				x += 10;
+				JLabel lb2 = new JLabel();
+				lb2.setText("보너스");
+				lb2.setBounds(x, y, 60, 60);
+				lb2.setHorizontalTextPosition(JLabel.CENTER);
+				lb2.setForeground(Color.BLACK);
+				lb2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+				pnl.add(lb2);
+				x += 53;
+			}
+
+			JLabel lb2 = new JLabel();
+			lb2.setText("" + listS.get(i));
+			lb2.setHorizontalTextPosition(JLabel.CENTER);
+			lb2.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+			lb2.setForeground(Color.WHITE);
+			lb2.setBounds(x, y, 60, 60);
+			pnl.add(lb2);
+			// 숫자 크기별 이미 넣기
+			int a = listS.get(i);
+			숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb2);
+			x += 53;
+		}
+	}
+
+	// 유저 정보 메소드
+	private void UserInfromationPrint(int num, JLabel pnl, ImageIcon icon3, ImageIcon icon4, ImageIcon icon5,
+			ImageIcon icon6, ImageIcon icon7, ImageIcon icon8, ImageIcon icon10, char c, List<Integer> listS) {
+		int x1 = 145;
+		int y1 = 370;
+		for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
+			char c2 = (char) (c + i);
+			String s = String.valueOf(c2);
+			JLabel lb1 = new JLabel();
+			lb1.setText("" + s);
+			lb1.setBounds(x1 - 110, y1 - 10, 60, 60);
+			lb1.setFont(new Font(" ", Font.BOLD, 15));
+			lb1.setHorizontalTextPosition(JLabel.RIGHT);
+			lb1.setForeground(Color.BLACK);
+			pnl.add(lb1);
+			for (int j = 0; j < LottoNum.listM.get(num).get(s).size(); j++) {
+				JLabel lb = new JLabel();
+				lb.setText("" + LottoNum.listM.get(num).get(s).get(j));
+				lb.setBounds(x1, y1, 40, 40);
+				lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+				lb.setForeground(Color.WHITE);
+				lb.setHorizontalTextPosition(JLabel.CENTER);
+				int a = LottoNum.listM.get(num).get(s).get(j);
+				숫자크기별이미지(a, icon4, icon5, icon6, icon7, icon8, lb);
+				for (int l = 0; l < listS.size(); l++) {
+					if (l <= LottoNum.listM.get(num).get(s).size() - 1) {
+						if (LottoNum.listM.get(num).get(s).get(j).equals(listS.get(l))) {
+							lb.setIcon(icon10);
+						}
+					} else {
+						if (LottoNum.listM.get(num).get(s).get(j).equals(listS.get(l))) {
+							lb.setIcon(icon3);
+						}
+					}
+				}
+				pnl.add(lb);
+				x1 += 55;
+			}
+			x1 -= (55 * LottoNum.listM.get(num).get(s).size());
+			y1 += 51;
+		}
+	}
+
+	// 다시하기 버튼
+	private void AgainBtn() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if (num == 0) {
-					for (int j = 0; j < LottoNum.s.size(); j++) {
-						dispose();
-						LottoNum.s.get(j).setVisible(false);
-					}
-					for (int j = 0; j < LottoNum.s2.size(); j++) {
-						dispose();
-						LottoNum.s2.get(j).setVisible(false);
-					}
-					for (int j = 0; j < LottoNum.s3.size(); j++) {
-						dispose();
-						LottoNum.s3.get(j).setVisible(false);
-					}
 					int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
 					if (result == JOptionPane.OK_OPTION) {
-
-						new LottoMain().setVisible(true);
 						LottoNum.LIST2.clear();
-						LottoNum.listM.get(num).clear();
+						LottoNum.listM.clear();
 						LottoNum.SET.clear();
 						LottoNum.count = 0;
 						LottoNum.count2 = 0;
+						for (int j = 0; j < LottoNum.s.size(); j++) {
+							LottoNum.s.get(j).setVisible(false);
+							dispose();
+						}
+						for (int j = 0; j < LottoNum.s2.size(); j++) {
+							LottoNum.s2.get(j).setVisible(false);
+							dispose();
+						}
+						for (int j = 0; j < LottoNum.s3.size(); j++) {
+							LottoNum.s3.get(j).setVisible(false);
+							dispose();
+						}
+						new LottoMain().setVisible(true);
 						if (LottoNum.SET.size() < 7) {
 							Random r = new Random();
 							while (true) {
@@ -255,39 +291,17 @@ public class LottoLast extends JFrame {
 								}
 							}
 						}
-						dispose();
 					} else if (result == 1) {
 						setDefaultCloseOperation(EXIT_ON_CLOSE);
 					} else {
 						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 					}
+					dispose();
 				}
-//				else {
-//
-//					int result = JOptionPane.showConfirmDialog(null, "첫번째 용지에서 선택하세요");
-//					if (result == JOptionPane.OK_OPTION) {
-//						dispose();
-//					} else if (result == 1) {
-//						dispose();
-//					} else {
-//						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-//					}
-//
-//				}
-			}
+				
+		
 		});
-
-		pnl.setBounds(0, 0, 500, 670);
-		pnl.setLayout(null);
-
-		setLayout(null);
-		add(pnl);
-		pnl.setIcon(icon);
-		setBounds(0, 0, 500, 670);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setLocationRelativeTo(null);
 	}
-
 // 숫자 크기별 이미지 넣기
 	public void 숫자크기별이미지(int a, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6, ImageIcon icon7, ImageIcon icon8,
 			JLabel lb) {
@@ -354,6 +368,6 @@ public class LottoLast extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		// new LottoLast().setVisible(true);
+		 new LottoMain().setVisible(true);
 	}
 }

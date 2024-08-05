@@ -53,9 +53,14 @@ public final class LottoSecond extends JFrame {
 		lb2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+		
 				if (LottoNum.count2 == LottoNum.count) {
 					dispose();
-					new LottoLast(num).setVisible(true);
+					LottoLast ll = new LottoLast(num);
+					ll.setVisible(true);
+					LottoNum.s3.add(ll);
+					
+				//	new LottoLast(num).setVisible(true);
 				}
 
 			}
@@ -65,8 +70,6 @@ public final class LottoSecond extends JFrame {
 		pnls.get(0).add(lb2);
 		x = 50;
 		y = 0;
-
-		try {
 			for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
 				char c = 'A';
 				char s = (char) (c + i);
@@ -89,12 +92,7 @@ public final class LottoSecond extends JFrame {
 				pnls.get(1).add(lbl);
 				pnls.get(1).add(lbl2);
 			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("이건 불가");
-			LottoLast ll = new LottoLast(num);
-			ll.setVisible(true);
-			LottoNum.s3.add(ll);
-		}
+		
 
 		pnls.get(1).setBackground(Color.white);
 
