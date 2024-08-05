@@ -45,15 +45,19 @@ public final class LottoSecond extends JFrame {
 		lb.setIcon(icon);
 		lb.setBounds(0, 0, 320, 200);
 		JButton lb2 = new JButton();
+
 		lb2.setIcon(icon2);
 		lb2.setBounds(350, 50, 85, 85);
 		lbg.setBounds(360, 130, 85, 40);
-		lb2.addActionListener(new ActionListener() {
 
+		lb2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new LottoLast(num).setVisible(true);
+				if (LottoNum.count2 == LottoNum.count) {
+					dispose();
+					new LottoLast(num).setVisible(true);
+				}
+
 			}
 		});
 

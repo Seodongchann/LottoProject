@@ -20,6 +20,7 @@ public class LottoMain extends JPanel {
 			try {
 				String s = JOptionPane.showInputDialog("몇장을 사시겠습니까?");
 				int num = Integer.parseInt(s);
+				LottoNum.count = num;
 				for (int i = 0; i < num; i++) {
 					LottoNum.s.add(new LottoStart(i));
 					LottoNum.s.get(i).setVisible(true);

@@ -23,7 +23,6 @@ public class LottoStart extends JFrame {
 	private static final int Max = 6;
 	private int count = 0;
 	private int[] counts = { 0, 0, 0, 0, 0 };
-	int sum = 0;
 
 	// btn = NEXT버튼
 	// btn2 = 숫자 1~45번 버튼
@@ -263,6 +262,7 @@ public class LottoStart extends JFrame {
 					LottoNum.s2.add(ls);
 					JOptionPane.showMessageDialog(null, "결과확인 : QR코드를 클릭하여 주세요", "필수체크 사항",
 							JOptionPane.WARNING_MESSAGE);
+					LottoNum.count2++;
 				}
 
 				if (map.size() == 0) {
