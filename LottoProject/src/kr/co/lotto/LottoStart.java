@@ -46,7 +46,7 @@ public class LottoStart extends JFrame {
 		//초기화 버튼 설정값
 		JButton btn6 = RestBtn(p);
 		
-		//Next버튼 설정값
+		//Next버튼 설정
 		JButton btn = NextBtn();
 		ImageIcon icon = new ImageIcon(LottoStart.class.getResource("asdfg.png"));
 		lbl.setIcon(icon);
@@ -65,9 +65,13 @@ public class LottoStart extends JFrame {
 		int f = 50;
 		// 페널 사이즈 조정
 		int[] ss = new int[6];
+		//패널 담는 리스트 
 		List<JPanel> list = new ArrayList<JPanel>();
+		//각 패널당 버튼의 개수 
 		List<List<JButton>> list2 = new ArrayList<List<JButton>>();
+		//초기화 버튼 
 		List<JButton> listC = new ArrayList<JButton>();
+		//자동 버튼
 		List<JButton> listD = new ArrayList<JButton>();
 		for (int j = 0; j < 5; j++) {
 

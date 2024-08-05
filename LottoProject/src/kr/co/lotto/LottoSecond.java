@@ -25,6 +25,7 @@ public final class LottoSecond extends JFrame {
 		int w = 459;
 		int h = 200;
 		setLayout(null);
+		//패널 담는 리스트 
 		List<JPanel> pnls = new ArrayList<JPanel>();
 		for (int i = 0; i < 3; i++) {
 			pnls.add(new JPanel());
