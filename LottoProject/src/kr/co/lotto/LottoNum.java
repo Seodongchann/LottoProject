@@ -7,12 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-
-
 public class LottoNum {
 	static Set<Integer> SET = new TreeSet<Integer>();
 	static List<List<String>> LIST2= new ArrayList<List<String>>(); 

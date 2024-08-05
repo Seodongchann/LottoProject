@@ -35,7 +35,6 @@ public class LottoMain extends JPanel {
 				}
 				당첨번호추첨메소드(r);
 				break;
-
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(frame, "숫자를 입력해 주세요!!!", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception e) {

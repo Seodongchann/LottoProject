@@ -26,8 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-import com.sun.javafx.embed.swing.Disposer;
 
 public class LottoLast extends JFrame {
 

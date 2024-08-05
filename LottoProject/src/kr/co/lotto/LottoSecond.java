@@ -53,14 +53,21 @@ public final class LottoSecond extends JFrame {
 		lb2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+
 				if (LottoNum.count2 == LottoNum.count) {
-					dispose();
-					LottoLast ll = new LottoLast(num);
-					ll.setVisible(true);
-					LottoNum.s3.add(ll);
+					for (int i = 0; i < LottoNum.s2.size(); i++) {
+						LottoLast ll = new LottoLast(i);
+						LottoNum.s3.add(ll);
+						dispose();
+						LottoNum.s2.get(i).setVisible(false);
+						LottoNum.s3.get(i).setVisible(true);
 					
-				//	new LottoLast(num).setVisible(true);
+					}
+//					for (int i = 0; i < LottoNum.s3.size(); i++) {
+//
+//						
+//					}
+					
 				}
 
 			}
@@ -70,29 +77,28 @@ public final class LottoSecond extends JFrame {
 		pnls.get(0).add(lb2);
 		x = 50;
 		y = 0;
-			for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
-				char c = 'A';
-				char s = (char) (c + i);
-				JLabel lbl = new JLabel(String.valueOf(s));
+		for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
+			char c = 'A';
+			char s = (char) (c + i);
+			JLabel lbl = new JLabel(String.valueOf(s));
 
-				JLabel lbl2 = new JLabel(LottoNum.LIST2.get(num).get(i));
+			JLabel lbl2 = new JLabel(LottoNum.LIST2.get(num).get(i));
 
-				lbl.setBounds(x, y, 40, 40);
-				lbl2.setBounds(x += 50, y, 40, 40);
-				for (int j = 0; j < LottoNum.listM.get(num).get(String.valueOf(s)).size(); j++) {
-					String s2 = String.valueOf(LottoNum.listM.get(num).get(String.valueOf(s)).get(j));
-					JLabel lbls = new JLabel(s2);
-					lbls.setFont(new Font("", Font.BOLD, 15));
-					x += 50;
-					lbls.setBounds(x, y, 40, 40);
-					pnls.get(1).add(lbls);
-				}
-				x = 50;
-				y += 40;
-				pnls.get(1).add(lbl);
-				pnls.get(1).add(lbl2);
+			lbl.setBounds(x, y, 40, 40);
+			lbl2.setBounds(x += 50, y, 40, 40);
+			for (int j = 0; j < LottoNum.listM.get(num).get(String.valueOf(s)).size(); j++) {
+				String s2 = String.valueOf(LottoNum.listM.get(num).get(String.valueOf(s)).get(j));
+				JLabel lbls = new JLabel(s2);
+				lbls.setFont(new Font("", Font.BOLD, 15));
+				x += 50;
+				lbls.setBounds(x, y, 40, 40);
+				pnls.get(1).add(lbls);
 			}
-		
+			x = 50;
+			y += 40;
+			pnls.get(1).add(lbl);
+			pnls.get(1).add(lbl2);
+		}
 
 		pnls.get(1).setBackground(Color.white);
 
