@@ -26,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
 public class LottoLast extends JFrame {
 
 	public LottoLast(int num) {
@@ -83,7 +82,6 @@ public class LottoLast extends JFrame {
 		int y2 = 370;
 		// 당첨번호 조회 메소드
 		WinningNumberCheck(num, pnl, c, listS, first, second, third, four, five, mess, clap, clap1, x2, y2);
-
 
 		pnl.setBounds(0, 0, 500, 670);
 		pnl.setLayout(null);
@@ -255,51 +253,54 @@ public class LottoLast extends JFrame {
 	private void AgainBtn() {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-					int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
-					if (result == JOptionPane.OK_OPTION) {
-						LottoNum.LIST2.clear();
-						LottoNum.listM.clear();
-						LottoNum.SET.clear();
-						LottoNum.count = 0;
-						LottoNum.count2 = 0;
-						for (int j = 0; j < LottoNum.s.size(); j++) {
-							LottoNum.s.get(j).setVisible(false);
-							dispose();
-						}
-						for (int j = 0; j < LottoNum.s2.size(); j++) {
-							LottoNum.s2.get(j).setVisible(false);
-							dispose();
-						}
-						for (int j = 0; j < LottoNum.s3.size(); j++) {
-							LottoNum.s3.get(j).setVisible(false);
-							dispose();
-						}
-						new LottoMain().setVisible(true);
-						if (LottoNum.SET.size() < 7) {
-							Random r = new Random();
-							while (true) {
-								for (int i = 0; i < 7; i++) {
-									int a = r.nextInt(45) + 1;
-									LottoNum.SET.add(a);
-								}
-								if (LottoNum.SET.size() > 6) {
-									break;
-								} else {
-									LottoNum.SET.clear();
-								}
+				int result = JOptionPane.showConfirmDialog(null, "다시 응모하시겠습니까?");
+				if (result == JOptionPane.OK_OPTION) {
+					LottoNum.LIST2.clear();
+					LottoNum.listM.clear();
+					LottoNum.SET.clear();
+					LottoNum.count = 0;
+					LottoNum.count2 = 0;
+					for (int j = 0; j < LottoNum.s.size(); j++) {
+						LottoNum.s.get(j).setVisible(false);
+						dispose();
+					}
+					for (int j = 0; j < LottoNum.s2.size(); j++) {
+						LottoNum.s2.get(j).setVisible(false);
+						dispose();
+					}
+					for (int j = 0; j < LottoNum.s3.size(); j++) {
+						LottoNum.s3.get(j).setVisible(false);
+						dispose();
+					}
+					LottoNum.s.clear();
+					LottoNum.s2.clear();
+					LottoNum.s3.clear();
+					new LottoMain().setVisible(true);
+					if (LottoNum.SET.size() < 7) {
+						Random r = new Random();
+						while (true) {
+							for (int i = 0; i < 7; i++) {
+								int a = r.nextInt(45) + 1;
+								LottoNum.SET.add(a);
+							}
+							if (LottoNum.SET.size() > 6) {
+								break;
+							} else {
+								LottoNum.SET.clear();
 							}
 						}
-					} else if (result == 1) {
-						setDefaultCloseOperation(EXIT_ON_CLOSE);
-					} else {
-						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 					}
-					dispose();
+				} else if (result == 1) {
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
+				} else {
+					setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 				}
-				
-		
+				dispose();
+			}
+
 		});
 	}
+
 // 숫자 크기별 이미지 넣기
 	public void 숫자크기별이미지(int a, ImageIcon icon4, ImageIcon icon5, ImageIcon icon6, ImageIcon icon7, ImageIcon icon8,
 			JLabel lb) {
@@ -366,6 +367,6 @@ public class LottoLast extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		 new LottoMain().setVisible(true);
+		new LottoMain().setVisible(true);
 	}
 }

@@ -25,7 +25,7 @@ public final class LottoSecond extends JFrame {
 		int w = 459;
 		int h = 200;
 		setLayout(null);
-		//패널 담는 리스트 
+		// 패널 담는 리스트
 		List<JPanel> pnls = new ArrayList<JPanel>();
 		for (int i = 0; i < 3; i++) {
 			pnls.add(new JPanel());
@@ -56,20 +56,14 @@ public final class LottoSecond extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (LottoNum.count2 == LottoNum.count) {
-					for (int i = 0; i < LottoNum.s2.size(); i++) {
+					for (int i = 0; i < LottoNum.count; i++) {
 						LottoLast ll = new LottoLast(i);
 						LottoNum.s3.add(ll);
 						dispose();
 						LottoNum.s2.get(i).setVisible(false);
-					
-					}
-					for (int i = 0; i < LottoNum.s3.size(); i++) {
-
 						LottoNum.s3.get(i).setVisible(true);
 					}
-					
 				}
-
 			}
 		});
 
