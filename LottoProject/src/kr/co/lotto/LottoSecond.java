@@ -50,7 +50,7 @@ public final class LottoSecond extends JFrame {
 		lb2.setIcon(icon2);
 		lb2.setBounds(350, 50, 85, 85);
 		lbg.setBounds(360, 130, 85, 40);
-
+		//LottoLast로 넘어가는 기능 
 		lb2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,11 +66,12 @@ public final class LottoSecond extends JFrame {
 				}
 			}
 		});
-
+		//페널에 QR코드, Lotto로고 넣기
 		pnls.get(0).add(lb);
 		pnls.get(0).add(lb2);
 		x = 50;
 		y = 0;
+		//선택된 Pink색 버튼 가져오기 
 		for (int i = 0; i < LottoNum.listM.get(num).size(); i++) {
 			char c = 'A';
 			char s = (char) (c + i);
@@ -95,7 +96,8 @@ public final class LottoSecond extends JFrame {
 		}
 
 		pnls.get(1).setBackground(Color.white);
-
+		
+		//로또 게임수만큼 계산하기 
 		JLabel lb3 = new JLabel();
 		JLabel lb4 = new JLabel("$  " + (LottoNum.listM.get(num).size() * 1000));
 		lb4.setFont(new Font("", Font.BOLD, 25));
