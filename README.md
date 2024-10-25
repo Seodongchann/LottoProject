@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src = "(https://github.com/user-attachments/assets/5a3c3dc4-2bed-4491-b31d-d75dbb9f9e2f)" width="400" height="250"/>
+ <img src = "https://github.com/user-attachments/assets/5a3c3dc4-2bed-4491-b31d-d75dbb9f9e2f)" width="400" height="200"/>
 
   LOTTO PROJECT 
 </h1>
