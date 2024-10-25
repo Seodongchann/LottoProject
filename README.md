@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src = "https://github.com/user-attachments/assets/5a3c3dc4-2bed-4491-b31d-d75dbb9f9e2f" width="400" height="200"/>
+ <img src = "https://github.com/user-attachments/assets/5a3c3dc4-2bed-4491-b31d-d75dbb9f9e2f" width="600" height="250"/>
 
   LOTTO PROJECT 
 </h1>
@@ -66,7 +66,7 @@
 
 
 
-**참고 이미지**
+## **참고 이미지**
 
 
 ![KakaoTalk_20240726_110450339](https://github.com/user-attachments/assets/bbd45ca6-21f2-4853-90ae-4b6204e33f54)
