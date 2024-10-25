@@ -9,9 +9,9 @@
 </p>
 
 ## LOTTO PROJECT
-> 가상 LOTTO GUI 프로그램  
+> - 가상 LOTTO GUI 프로그램  
 > 
-> 개발기간 : 2024.07.26 ~ 2024.08.06
+> - 개발기간 : 2024.07.26 ~ 2024.08.06
 
 
 ## What is? 
@@ -26,7 +26,8 @@
 ---
 **내가 담당한 Class** 
 
-![image](https://github.com/user-attachments/assets/c2cbed38-cfa3-46bb-9507-a8b1bb737b6b)
+![image](https://github.com/user-attachments/assets/3be6431d-e0fd-402e-94a0-9e174c7ced06)
+
 
 
 
