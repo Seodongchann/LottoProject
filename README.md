@@ -94,7 +94,7 @@
 
 ## Run
 
-
+[Lotto.jar download link](https://github.com/Seodongchann/LottoProject/blob/master/Lottojar.jar)
 
 
 ## Authors
