@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src = "https://github.com/user-attachments/assets/6a9398a3-b041-4a1f-8c4e-066d4142afec" width="700" height="400"/>
+ <img src = "https://github.com/user-attachments/assets/0e73ddd5-8a9c-4e24-a010-451e4c5bc549" width="500" height="300"/>
 
   LOTTO PROJECT 
 </h1>
@@ -20,10 +20,12 @@
 - 수동, 반자동, 자동 중 원하는 방법으로 로또 번호를 입력 후, 당첨 번호와 비교, 결과확인
 
 ## Role
+
 ![image](https://github.com/user-attachments/assets/d6f7092e-eed6-4ba7-9fb4-b830a5798bf8)
 
 
 **내가 담당한 Class** 
+
 ![image](https://github.com/user-attachments/assets/860bc99a-443b-486c-bfe1-4e4cdf7989f7)
 
 
