@@ -72,10 +72,10 @@
 ![KakaoTalk_20240726_110450339](https://github.com/user-attachments/assets/bbd45ca6-21f2-4853-90ae-4b6204e33f54)
 <br>
 <br>
-![KakaoTalk_20240726_110450339_01](https://github.com/user-attachments/assets/5c8b4a4e-5027-414b-8cfb-f5a913570759)
+<img src = "https://github.com/user-attachments/assets/5c8b4a4e-5027-414b-8cfb-f5a913570759" width = "400" height="300"/>
 <br>
 <br>
-![KakaoTalk_20240726_110450339_02](https://github.com/user-attachments/assets/2e96e8a4-5871-46e6-9a9c-8c3fa320e9c0)
+<img src = "https://github.com/user-attachments/assets/2e96e8a4-5871-46e6-9a9c-8c3fa320e9c0" width="300" height="300"/>
 
 
 
