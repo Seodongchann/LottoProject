@@ -26,7 +26,8 @@
 ---
 **내가 담당한 Class** 
 
-![image](https://github.com/user-attachments/assets/860bc99a-443b-486c-bfe1-4e4cdf7989f7)
+![image](https://github.com/user-attachments/assets/c2cbed38-cfa3-46bb-9507-a8b1bb737b6b)
+
 
 
 
@@ -91,7 +92,11 @@
 
     
 
-    
+## Run
+
+
+
+
 ## Authors
 
 
